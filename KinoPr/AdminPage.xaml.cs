@@ -24,5 +24,23 @@ namespace KinoPr
         {
             InitializeComponent();
         }
+
+
+
+
+
+
+
+
+        //Профиль
+        private void Change_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
