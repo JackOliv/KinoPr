@@ -62,14 +62,20 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Margin="10">
-                                <StackPanel Orientation="Horizontal" Margin="10">
-                                    <TextBox Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="NameFood"></TextBox>
-                                        
-                                    <Button Width="30" Click="FindUserFood_Click"></Button>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                            <StackPanel Margin="10" >
+                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                                    <TextBox Style="{DynamicResource TextBox}" Width="200" Height="40" x:Name="NameFood" ></TextBox>
+
+                                <Button  Style="{DynamicResource CustomButton}" Click="FindUserFood_Click" Margin="10">
+                                        <Image Source="/Img/Serch.png" Width="30" />
+                                    </Button>
                                 </StackPanel>
-                                <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
+                            <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -78,24 +84,29 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
-                            <StackPanel Margin="10">
-                                <ComboBox Margin="10" Style="{DynamicResource ComboBox}"></ComboBox>
-                                <StackPanel Margin="10" Orientation="Horizontal">
-                                    <TextBox  Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="FoodCount"></TextBox>
-                                        
-                                    <Button Width="30" Click="AddCount_Click"></Button>
-                                </StackPanel>
-                                <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
-                                        <DataGridTextColumn Header="Count" Binding="{Binding Name}"/>
-                                        <DataGridTextColumn Header="Price" Binding="{Binding Patronymic}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                        <StackPanel Margin="10" Grid.Column="1">
+                            <ComboBox Margin="10" Style="{DynamicResource ComboBox}" HorizontalAlignment="Center" MinWidth="100">
+                                <ComboBoxItem>da</ComboBoxItem>
+                                <ComboBoxItem>da</ComboBoxItem>
+                                <ComboBoxItem>da</ComboBoxItem>
+                            </ComboBox>
+                            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBox  Style="{DynamicResource TextBox}" Width="200" Height="40" x:Name="FoodCount"></TextBox>
+
+                                <Button  Style="{DynamicResource CustomButton}" Click="AddCount_Click" Margin="10">
+                                    <Image Source="/Img/Serch.png" Width="30" />
+                                </Button>
                             </StackPanel>
+                            <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
+                                    <DataGridTextColumn Header="Count" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Price" Binding="{Binding Patronymic}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOrderButton_Click"  Margin="5"/>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOrderButton_Click"  Margin="5" />
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
