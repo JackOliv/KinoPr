@@ -20,9 +20,11 @@ namespace KinoPr
     /// </summary>
     public partial class ManagerPage : Page
     {
-        public ManagerPage()
+        public MainWindow mainWindow;
+        public ManagerPage(MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
         }
 
 
@@ -51,6 +53,10 @@ namespace KinoPr
 
         }
         private void FindFood_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddCount_Click(object sender, RoutedEventArgs e)
         {
 
         }

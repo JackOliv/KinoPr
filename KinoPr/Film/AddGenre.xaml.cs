@@ -20,14 +20,16 @@ namespace KinoPr
     /// </summary>
     public partial class AddGenre : Page
     {
-        public AddGenre()
+        public MainWindow mainWindow;
+        public AddGenre(MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {

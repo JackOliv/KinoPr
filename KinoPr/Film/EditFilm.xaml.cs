@@ -20,14 +20,16 @@ namespace KinoPr
     /// </summary>
     public partial class EditFilm : Page
     {
-        public EditFilm()
+        public MainWindow mainWindow;
+        public EditFilm(MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

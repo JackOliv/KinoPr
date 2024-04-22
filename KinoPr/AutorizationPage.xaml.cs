@@ -16,24 +16,20 @@ using System.Windows.Shapes;
 namespace KinoPr
 {
     /// <summary>
-    /// Логика взаимодействия для AddUser.xaml
+    /// Логика взаимодействия для AutorizationPage.xaml
     /// </summary>
-    public partial class AddUser : Page
+    public partial class AutorizationPage : Page
     {
         public MainWindow mainWindow;
-        public AddUser(MainWindow main)
+        public AutorizationPage(MainWindow main)
         {
             InitializeComponent();
             mainWindow = main;
+            polelogin.Focus();
         }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void btnlog_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
-        }
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

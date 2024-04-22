@@ -20,14 +20,16 @@ namespace KinoPr
     /// </summary>
     public partial class AddFood : Page
     {
-        public AddFood()
+        public MainWindow mainWindow;
+        public AddFood(MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {

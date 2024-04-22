@@ -20,14 +20,16 @@ namespace KinoPr
     /// </summary>
     public partial class AddSession : Page
     {
-        public AddSession()
+        public MainWindow mainWindow;
+        public AddSession(MainWindow main)
         {
             InitializeComponent();
+            mainWindow = main;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {

@@ -23,11 +23,13 @@ namespace KinoPr
         public MainWindow()
         {
             InitializeComponent();
+            FrameManager.MainFrame = this.Mainframe;
+
+            Mainframe.Navigate(new AutorizationPage(this));
         }
 
         private void btnlog_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
