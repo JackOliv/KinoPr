@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminPage"
-      Background="White">
+      Background="#273043">
 
     <Grid>
         <TabControl Margin="5">
@@ -17,8 +17,8 @@
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                     <Setter Property="Padding" Value="4,4,4,4"/>
                     <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}"/>
-                    <Setter Property="Background" Value="#F9F9F9"/>
+                    <Setter Property="BorderBrush" Value="#9197AE"/>
+                    <Setter Property="Background" Value="#273043"/>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Setter Property="Template">
@@ -40,10 +40,11 @@
                 </Style>
                 <Style TargetType="TabItem">
                     <Setter Property="Height" Value="40" />
+                    <Setter Property="Foreground" Value="#EFF6EE" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
-                                <Border Name="Border" BorderThickness="1,1,0,1" BorderBrush="#8C8E94" CornerRadius="4,0,0,4" Margin="0,0">
+                                <Border Name="Border" BorderThickness="1,1,0,1" BorderBrush="#273043" CornerRadius="4,0,0,4" Margin="0,0">
                                     <ContentPresenter x:Name="ContentSite"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
@@ -52,10 +53,10 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                        <Setter TargetName="Border" Property="Background" Value="#5A5E6F" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                        <Setter TargetName="Border" Property="Background" Value="#9197AE" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -81,11 +82,11 @@
                                 <DataGridTextColumn Header="Слоган" Binding="{Binding Tagline}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddMoviesButton_Click"  Margin="5"/>
-                            <Button Content="Редактировать" Click="EditMoviesButton_Click" Margin="5"/>
-                            <Button Content="Удалить" Click="DeleteMoviesButton_Click" Margin="5"/>
-                            <Button Content="Добавить жанр" Click="AddGenreButton_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Content="Добавить" Click="AddMoviesButton_Click" Style="{StaticResource Button}"  Margin="5"/>
+                            <Button Content="Редактировать" Click="EditMoviesButton_Click" Style="{StaticResource Button}" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteMoviesButton_Click" Style="{StaticResource Button}" Margin="5"/>
+                            <Button Content="Добавить жанр" Click="AddGenreButton_Click" Style="{StaticResource Button}" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
@@ -106,10 +107,10 @@
                                 <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddSessionButton_Click" Margin="5"/>
-                            <Button Content="Редактировать" Click="EditSessionButton_Click" Margin="5"/>
-                            <Button Content="Удалить" Click="DeleteSessionButton_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddSessionButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditSessionButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteSessionButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
@@ -133,10 +134,10 @@
                                 <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddUserButton_Click" Margin="5"/>
-                            <Button Content="Редактировать" Click="EditUserButton_Click" Margin="5"/>
-                            <Button Content="Удалить" Click="DeleteUserButton_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddUserButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditUserButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteUserButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
@@ -156,10 +157,10 @@
                                 <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddFoodButton_Click" Margin="5"/>
-                            <Button Content="Редактировать" Click="EditFoodButton_Click" Margin="5"/>
-                            <Button Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddFoodButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditFoodButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
@@ -177,56 +178,56 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label HorizontalAlignment="Center"  FontSize="24" Grid.Column="1">Профиль</Label>
+                        <Label HorizontalAlignment="Center" Style="{DynamicResource Label}"  FontSize="24" Grid.Column="1">Профиль</Label>
 
                         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="20 0" >
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Фамилия:"  />
-                                        <Label x:Name="profSurname" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Фамилия:"  />
+                                        <Label Style="{DynamicResource Label}" x:Name="profSurname" Content="*****" />
                                     </StackPanel>
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Имя:" />
-                                        <Label x:Name="profName" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Имя:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profName" Content="*****" />
                                     </StackPanel>
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Отчество:" />
-                                        <Label x:Name="profPatronymic" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Отчество:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profPatronymic" Content="*****" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
 
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Логин:" />
-                                        <Label x:Name="profLogin" Content="****" />
+                                        <Label Style="{DynamicResource Label}" Content="Логин:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profLogin" Content="****" />
                                     </StackPanel>
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Пароль:" />
-                                        <Label x:Name="profPassword" Content="*****"  Visibility="Collapsed"/>
-                                        <Label x:Name="placeholder" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Пароль:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profPassword" Content="*****"  Visibility="Collapsed"/>
+                                        <Label Style="{DynamicResource Label}" x:Name="placeholder" Content="*****" />
                                     </StackPanel>
 
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel MinWidth="80" >
-                                        <Label Content="Почта:" />
-                                        <Label x:Name="profEmail" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Почта:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profEmail" Content="*****" />
                                     </StackPanel>
                                     <StackPanel MinWidth="80">
-                                        <Label Content="Телефон:" />
-                                        <Label x:Name="profTelephone" Content="*****" />
+                                        <Label Style="{DynamicResource Label}" Content="Телефон:" />
+                                        <Label Style="{DynamicResource Label}" x:Name="profTelephone" Content="*****" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel >
-                                    <Label Content="День рождения:" />
-                                    <Label x:Name="profBiht" Content="*****" />
+                                    <Label Style="{DynamicResource Label}" Content="День рождения:" />
+                                    <Label Style="{DynamicResource Label}" x:Name="profBiht" Content="*****" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0">
-                            <Button HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2">Изменить профиль</Button>
-                            <Button HorizontalAlignment="Left" Click="Exit_Click" Grid.Row="2">Выйти из профиля</Button>
+                            <Button Style="{DynamicResource Button}" HorizontalAlignment="Left" Click="Change_Click"  Grid.Row="2" Margin="5" Padding="1" Height="35">Изменить профиль</Button>
+                            <Button Style="{DynamicResource Button}" HorizontalAlignment="Left" Click="Exit_Click"   Grid.Row="2" Margin="5" Padding="1" Height="35">Выйти из профиля</Button>
                         </StackPanel>
                         <Label Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" x:Name="lowbalans" Content="*Вашего баланса недостаточно чтобы открыть вклад"  Foreground="red" Visibility="Collapsed"/>
                     </Grid>

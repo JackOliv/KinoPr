@@ -6,64 +6,32 @@
       xmlns:local="clr-namespace:KinoPr"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AutorizationPage">
-    <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#FF3B7BF9"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-        BorderBrush="{TemplateBinding BorderBrush}"
-        BorderThickness="{TemplateBinding BorderThickness}"
-        Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                      VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-            </Style.Resources>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF244FA4"/>
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>
-    </Page.Resources>
+      Title="AutorizationPage"
+      Background="#273043">
     <Grid>
         <StackPanel VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center" Margin="10" FontSize="40" FontFamily="Comic Sans MS" >Войдите в систему</Label>
+            <Label HorizontalAlignment="Center" Margin="10" FontSize="40" Style="{StaticResource Label}" >Войдите в систему</Label>
             <StackPanel HorizontalAlignment="Center">
-                <Label Margin="0 0 0 0" >Логин</Label>
+                <Label Style="{StaticResource Label}" >Логин</Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                    <Border CornerRadius="15" BorderBrush="#FFABADB3" BorderThickness="1" VerticalAlignment="Center" UseLayoutRounding="True">
-                        <TextBox x:Name="polelogin" Width="150" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" VerticalContentAlignment="Center" BorderThickness="0" BorderBrush="{x:Null}" />
+                    <Border Style="{DynamicResource Border}">
+                        <TextBox x:Name="polelogin" Width="150" Height="40" Style="{StaticResource TextBox}" />
                     </Border>
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0 20 0 0">
-                <Label Margin="0 0 0 0"  Content="Пароль"/>
+                <Label Margin="0 0 0 0"  Content="Пароль" Style="{StaticResource Label}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image  Height="30" Margin="0 0 5 0"/>
-                    <Border CornerRadius="15" BorderBrush="#FFABADB3" BorderThickness="1" VerticalAlignment="Center" UseLayoutRounding="True">
-                        <PasswordBox x:Name="polepassword" Width="150" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" VerticalContentAlignment="Center" BorderThickness="0" BorderBrush="{x:Null}" />
+                    <Border Style="{DynamicResource Border}">
+                        <PasswordBox x:Name="polepassword" Width="150" Height="40" Style="{StaticResource PasswordBox}"/>
                     </Border>
 
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 50 0 0">
-                <Button x:Name="btnlog" Margin="5" BorderBrush="{x:Null}" Content="Войти" Click="btnlog_Click"/>
+                <Button x:Name="btnlog" Margin="5" BorderBrush="{x:Null}" Style="{StaticResource Button}" Content="Войти" Click="btnlog_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>
