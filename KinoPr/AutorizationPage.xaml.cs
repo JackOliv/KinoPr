@@ -29,7 +29,7 @@ namespace KinoPr
         }
         private void btnlog_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
         }
     }
 }
