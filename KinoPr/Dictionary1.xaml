@@ -255,11 +255,13 @@ Margin="10,2"/>
     </Style>
 
 
-    <!-- Ваш ресурс -->
+
+
+
     <Style x:Key="ComboBox" TargetType="ComboBox">
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="Foreground" Value="#EFF6EE" />
+        <Setter Property="Background" Value="#273043" />
+        <Setter Property="BorderBrush" Value="#9197AE" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="Template">
@@ -312,7 +314,7 @@ Margin="10,2"/>
                             SnapsToDevicePixels="True"
                             MinWidth="{TemplateBinding ActualWidth}"
                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                            Background="White"
+                            Background="#273043"
                         >
                                 <ScrollViewer
                                 Margin="4,6,4,6"
@@ -349,9 +351,6 @@ Margin="10,2"/>
             </Setter.Value>
         </Setter>
     </Style>
-
-
-
 
 
 
