@@ -5,67 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KinoPr"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="1000"
       Title="ManagerPage"
       Background="#273043">
 
     <Grid>
-        <TabControl Margin="5">
-            <TabControl.Resources>
-                <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
-                <Style TargetType="{x:Type TabControl}">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    <Setter Property="Padding" Value="4,4,4,4"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="BorderBrush" Value="#9197AE"/>
-                    <Setter Property="FontFamily" Value="/Fonts/#JetBrainsMono" />
-                    <Setter Property="Background" Value="#273043"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabControl">
-                                <DockPanel>
-                                    <ScrollViewer DockPanel.Dock="Left"
-                HorizontalScrollBarVisibility="Disabled"
-                VerticalScrollBarVisibility="Auto">
-                                        <DockPanel LastChildFill="False" IsItemsHost="true" />
-                                    </ScrollViewer>
-                                    <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="0" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                        <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    </Border>
-                                </DockPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <Style TargetType="TabItem">
-                    <Setter Property="Height" Value="40" />
-                    <Setter Property="Foreground" Value="#EFF6EE" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Border Name="Border" BorderThickness="1,1,0,1" BorderBrush="#273043" CornerRadius="4,0,0,4" Margin="0,0">
-                                    <ContentPresenter x:Name="ContentSite"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                ContentSource="Header"
-                Margin="10,2"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#5A5E6F" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#9197AE" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
-            <TabItem DockPanel.Dock="Top" Header="Добавить на сеанс"  Margin="0,5,0,0">
+        <TabControl Margin="5" Style="{DynamicResource TabControl}">
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Добавить на сеанс"  Margin="0,5,0,0">
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -78,7 +24,7 @@
                                     <TextBox Width="100" x:Name="NameUser"></TextBox>
                                     <Button Width="30" Click="FindUser_Click"></Button>
                                 </StackPanel>
-                                <DataGrid x:Name="UsersDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid x:Name="UsersDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -92,7 +38,7 @@
                                     <TextBox Width="100" x:Name="NameFilm"></TextBox>
                                     <Button Width="30" Click="FindFilm_Click"></Button>
                                 </StackPanel>
-                                <DataGrid x:Name="SessionDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фильм" Binding="{Binding Title}"/>
                                         <DataGridTextColumn Header="Время начала" Binding="{Binding TimeStart}"/>
@@ -103,14 +49,13 @@
                                 </DataGrid>
                             </StackPanel>
                         </StackPanel>
-                        
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddOnSessionButton_Click"  Margin="5"/>
+                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOnSessionButton_Click"  Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem DockPanel.Dock="Top" Header="Продажа еды" >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Продажа еды" >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -120,10 +65,13 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Margin="10">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <TextBox Width="100" x:Name="NameFood"></TextBox>
+                                    <Border Style="{DynamicResource Border}">
+                                        <TextBox Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="NameFood"></TextBox>
+                                        
+                                    </Border>
                                     <Button Width="30" Click="FindUserFood_Click"></Button>
                                 </StackPanel>
-                                <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                                         <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -133,12 +81,15 @@
                                 </DataGrid>
                             </StackPanel>
                             <StackPanel Margin="10">
-                                <ComboBox Margin="10"></ComboBox>
+                                <ComboBox Margin="10" Style="{DynamicResource ComboBox}"></ComboBox>
                                 <StackPanel Margin="10" Orientation="Horizontal">
-                                    <TextBox Width="100" x:Name="FoodCount"></TextBox>
+                                    <Border Style="{DynamicResource Border}">
+                                    <TextBox  Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="FoodCount"></TextBox>
+                                        
+                                    </Border>
                                     <Button Width="30" Click="AddCount_Click"></Button>
                                 </StackPanel>
-                                <DataGrid x:Name="FoodDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
                                         <DataGridTextColumn Header="Count" Binding="{Binding Name}"/>
@@ -148,13 +99,13 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
-                            <Button Content="Добавить" Click="AddOrderButton_Click"  Margin="5"/>
+                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOrderButton_Click"  Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            
-            <TabItem DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
+
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
                 <TabItem.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -215,8 +166,8 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0">
-                            <Button Height="30" Width="120" HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2"  Margin="10">Изменить профиль</Button>
-                            <Button Height="30" Width="120" HorizontalAlignment="Left" Click="Exit_Click" Grid.Row="2" Margin="10">Выйти из профиля</Button>
+                            <Button Style="{DynamicResource Button}"  HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2"  Margin="10">Изменить профиль</Button>
+                            <Button Style="{DynamicResource Button}"  HorizontalAlignment="Left" Click="Exit_Click" Grid.Row="2" Margin="10">Выйти из профиля</Button>
                         </StackPanel>
                         <Label Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" x:Name="lowbalans" Content="*Вашего баланса недостаточно чтобы открыть вклад"  Foreground="red" Visibility="Collapsed"/>
                     </Grid>

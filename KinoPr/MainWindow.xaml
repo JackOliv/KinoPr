@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KinoPr"
         mc:Ignorable="d"
-        Title="KinoPr"  MinHeight="500" MinWidth="1000" Width="1000" Height="500" WindowStartupLocation ="CenterScreen">
+        Title="KinoPr"  MinHeight="500" MinWidth="1000" Width="1000" Height="500" WindowStartupLocation ="CenterScreen" Background="#273043">
     <Grid>
         <Frame Name="Mainframe" NavigationUIVisibility="Hidden"
  />

@@ -5,67 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KinoPr"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="950"
+      d:DesignHeight="500" d:DesignWidth="1000"
       Title="AdminPage"
       Background="#273043">
 
     <Grid>
-        <TabControl Margin="5">
-            <TabControl.Resources>
-                <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
-                <Style TargetType="{x:Type TabControl}">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    <Setter Property="Padding" Value="4,4,4,4"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="BorderBrush" Value="#9197AE"/>
-                    <Setter Property="FontFamily" Value="/Fonts/#JetBrainsMono" />
-                    <Setter Property="Background" Value="#273043"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabControl">
-                                <DockPanel>
-                                    <ScrollViewer DockPanel.Dock="Left"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto">
-                                        <DockPanel LastChildFill="False" IsItemsHost="true" />
-                                    </ScrollViewer>
-                                    <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="0" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                        <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    </Border>
-                                </DockPanel>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <Style TargetType="TabItem">
-                    <Setter Property="Height" Value="40" />
-                    <Setter Property="Foreground" Value="#EFF6EE" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Border Name="Border" BorderThickness="1,1,0,1" BorderBrush="#273043" CornerRadius="4,0,0,4" Margin="0,0">
-                                    <ContentPresenter x:Name="ContentSite"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            ContentSource="Header"
-                            Margin="10,2"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#5A5E6F" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="False">
-                                        <Setter TargetName="Border" Property="Background" Value="#9197AE" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TabControl.Resources>
-            <TabItem DockPanel.Dock="Top" Header="Список фильмов"  Margin="0,5,0,0">
+        <TabControl Margin="5" Style="{DynamicResource TabControl}">
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список фильмов"  Margin="0,5,0,0">
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -91,7 +37,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem DockPanel.Dock="Top" Header="Список сеансов" >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список сеансов" >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -115,7 +61,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem DockPanel.Dock="Top" Header="Список пользователей" >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список пользователей" >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -142,7 +88,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem DockPanel.Dock="Top" Header="Список еды"  >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список еды"  >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -165,7 +111,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
                 <TabItem.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
