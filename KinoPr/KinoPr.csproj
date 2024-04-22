@@ -55,7 +55,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Film\Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Food\AddFood.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Food\EditFood.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Session\AddSession.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Session\EditSession.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User\AddUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User\EditUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Film\AddFilm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Film\AddGenre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Film\EditFilm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -63,12 +103,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Film\Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Food\AddFood.xaml.cs">
+      <DependentUpon>AddFood.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Food\EditFood.xaml.cs">
+      <DependentUpon>EditFood.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FrameManager.cs" />
+    <Compile Include="Session\AddSession.xaml.cs">
+      <DependentUpon>AddSession.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Session\EditSession.xaml.cs">
+      <DependentUpon>EditSession.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\AddUser.xaml.cs">
+      <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Film\AddFilm.xaml.cs">
+      <DependentUpon>AddFilm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Film\AddGenre.xaml.cs">
+      <DependentUpon>AddGenre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Film\EditFilm.xaml.cs">
+      <DependentUpon>EditFilm.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

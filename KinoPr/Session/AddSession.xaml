@@ -1,0 +1,52 @@
+﻿<Page x:Class="KinoPr.AddSession"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KinoPr"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddSession"
+      Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Click="BackButton_Click" Width="30" Height="30" Content="" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30">Добавление сеанса</Label>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <StackPanel  >
+                <StackPanel>
+                    <Label>Фильм</Label>
+                    <ComboBox x:Name="Film"></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <Label>Время начала</Label>
+                    <TextBox x:Name="TimeStart"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel >
+                <StackPanel>
+                    <Label>Зал</Label>
+                    <ComboBox x:Name="Hall"></ComboBox>
+                </StackPanel>
+                <StackPanel>
+                    <Label>Время конца</Label>
+                    <TextBox x:Name="TimeEnd"></TextBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click">Добавить</Button>
+    </Grid>
+    
+</Page>
