@@ -65,10 +65,8 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Margin="10">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Border Style="{DynamicResource Border}">
-                                        <TextBox Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="NameFood"></TextBox>
+                                    <TextBox Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="NameFood"></TextBox>
                                         
-                                    </Border>
                                     <Button Width="30" Click="FindUserFood_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">
@@ -83,10 +81,8 @@
                             <StackPanel Margin="10">
                                 <ComboBox Margin="10" Style="{DynamicResource ComboBox}"></ComboBox>
                                 <StackPanel Margin="10" Orientation="Horizontal">
-                                    <Border Style="{DynamicResource Border}">
                                     <TextBox  Style="{DynamicResource TextBox}" Width="150" Height="40" x:Name="FoodCount"></TextBox>
                                         
-                                    </Border>
                                     <Button Width="30" Click="AddCount_Click"></Button>
                                 </StackPanel>
                                 <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}">

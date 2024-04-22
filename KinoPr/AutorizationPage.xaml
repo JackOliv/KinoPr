@@ -14,20 +14,14 @@
             <StackPanel HorizontalAlignment="Center">
                 <Label Style="{StaticResource Label}" >Логин</Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
-                    <Border Style="{DynamicResource Border}">
-                        <TextBox x:Name="polelogin" Width="150" Height="40" Style="{StaticResource TextBox}" />
-                    </Border>
+                    <TextBox x:Name="polelogin" Width="150" Height="40" Style="{StaticResource TextBox}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0 20 0 0">
                 <Label Margin="0 0 0 0"  Content="Пароль" Style="{StaticResource Label}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image  Height="30" Margin="0 0 5 0"/>
-                    <Border Style="{DynamicResource Border}">
-                        <PasswordBox x:Name="polepassword" Width="150" Height="40" Style="{StaticResource PasswordBox}"/>
-                    </Border>
-
+                    <PasswordBox x:Name="polepassword" Width="150" Height="40" Style="{StaticResource PasswordBox}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 50 0 0">
