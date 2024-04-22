@@ -175,6 +175,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\JetBrainsMono-Regular.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-SemiBold.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-Thin.ttf" />
+    <Resource Include="Fonts\JetBrainsMono-ThinItalic.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

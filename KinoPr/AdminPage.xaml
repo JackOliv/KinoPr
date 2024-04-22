@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KinoPr"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="950"
       Title="AdminPage"
       Background="#273043">
 
@@ -18,6 +18,7 @@
                     <Setter Property="Padding" Value="4,4,4,4"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="BorderBrush" Value="#9197AE"/>
+                    <Setter Property="FontFamily" Value="/Fonts/#JetBrainsMono" />
                     <Setter Property="Background" Value="#273043"/>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -71,8 +72,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="MoviesDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10"
-                  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid x:Name="MoviesDataGrid" Grid.Row="0"  Margin="10" Style="{StaticResource DataGrid}" HorizontalAlignment="Center">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
                                 <DataGridTextColumn Header="Год" Binding="{Binding Year}"/>
@@ -98,7 +98,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="SessionDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фильм" Binding="{Binding Title}"/>
                                 <DataGridTextColumn Header="Зал" Binding="{Binding Hall}"/>
@@ -122,7 +122,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="UsersDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid x:Name="UsersDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -149,7 +149,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
                                 <DataGridTextColumn Header="Граммовка" Binding="{Binding Gram}"/>
@@ -178,7 +178,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label HorizontalAlignment="Center" Style="{DynamicResource Label}"  FontSize="24" Grid.Column="1">Профиль</Label>
+                        <Label HorizontalAlignment="Center" Style="{DynamicResource Label}"  FontSize="34" Grid.Column="1" >Профиль</Label>
 
                         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="20 0" >
                             <StackPanel>

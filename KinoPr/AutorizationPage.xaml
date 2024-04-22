@@ -10,7 +10,7 @@
       Background="#273043">
     <Grid>
         <StackPanel VerticalAlignment="Center">
-            <Label HorizontalAlignment="Center" Margin="10" FontSize="40" Style="{StaticResource Label}" >Войдите в систему</Label>
+            <Label HorizontalAlignment="Center" Margin="20" FontSize="40" Style="{StaticResource Label}" >Войдите в систему</Label>
             <StackPanel HorizontalAlignment="Center">
                 <Label Style="{StaticResource Label}" >Логин</Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
