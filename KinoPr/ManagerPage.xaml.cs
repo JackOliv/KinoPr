@@ -28,6 +28,38 @@ namespace KinoPr
 
 
 
+        //Добавить на сеанс
+        private void FindUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void FindFilm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddOnSessionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+
+        //Продажа еды
+        private void FindUserFood_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void FindFood_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
 
         //Профиль

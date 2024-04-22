@@ -66,28 +66,101 @@
             <TabItem DockPanel.Dock="Top" Header="Список фильмов"  Margin="0,5,0,0">
                 <TabItem.Content>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="MoviesDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10"
+                  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                                <DataGridTextColumn Header="Год" Binding="{Binding Year}"/>
+                                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"/>
+                                <DataGridTextColumn Header="Длительность" Binding="{Binding Duration}"/>
+                                <DataGridTextColumn Header="Страна" Binding="{Binding Country}"/>
+                                <DataGridTextColumn Header="Слоган" Binding="{Binding Tagline}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddMoviesButton_Click"  Margin="5"/>
+                            <Button Content="Редактировать" Click="EditMoviesButton_Click" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteMoviesButton_Click" Margin="5"/>
+                            <Button Content="Добавить жанр" Click="AddGenreButton_Click" Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem DockPanel.Dock="Top" Header="Список сеансов" >
                 <TabItem.Content>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="SessionDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фильм" Binding="{Binding Title}"/>
+                                <DataGridTextColumn Header="Зал" Binding="{Binding Hall}"/>
+                                <DataGridTextColumn Header="Время начала" Binding="{Binding TimeStart}"/>
+                                <DataGridTextColumn Header="Время конца" Binding="{Binding TimeEnd}"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddSessionButton_Click" Margin="5"/>
+                            <Button Content="Редактировать" Click="EditSessionButton_Click" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteSessionButton_Click" Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem DockPanel.Dock="Top" Header="Список пользователей" >
                 <TabItem.Content>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="UsersDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
+                                <DataGridTextColumn Header="Номер телефона" Binding="{Binding Telephone}"/>
+                                <DataGridTextColumn Header="Почта" Binding="{Binding Email}"/>
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birth}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddUserButton_Click" Margin="5"/>
+                            <Button Content="Редактировать" Click="EditUserButton_Click" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteUserButton_Click" Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem DockPanel.Dock="Top" Header="Список еды"  >
                 <TabItem.Content>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" AutoGenerateColumns="False" Margin="10" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                                <DataGridTextColumn Header="Граммовка" Binding="{Binding Gram}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddFoodButton_Click" Margin="5"/>
+                            <Button Content="Редактировать" Click="EditFoodButton_Click" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
@@ -152,8 +225,8 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0">
-                            <Button Height="30" Width="120" HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2"  Margin="10">Изменить профиль</Button>
-                            <Button Height="30" Width="120" HorizontalAlignment="Left" Click="Exit_Click" Grid.Row="2" Margin="10">Выйти из профиля</Button>
+                            <Button HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2">Изменить профиль</Button>
+                            <Button HorizontalAlignment="Left" Click="Exit_Click" Grid.Row="2">Выйти из профиля</Button>
                         </StackPanel>
                         <Label Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" x:Name="lowbalans" Content="*Вашего баланса недостаточно чтобы открыть вклад"  Foreground="red" Visibility="Collapsed"/>
                     </Grid>

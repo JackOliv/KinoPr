@@ -66,14 +66,88 @@
             <TabItem DockPanel.Dock="Top" Header="Добавить на сеанс"  Margin="0,5,0,0">
                 <TabItem.Content>
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="10">
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBox Width="100" x:Name="NameUser"></TextBox>
+                                    <Button Width="30" Click="FindUser_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="UsersDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                        <DataGridTextColumn Header="Номер телефона" Binding="{Binding Telephone}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <StackPanel Margin="10">
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBox Width="100" x:Name="NameFilm"></TextBox>
+                                    <Button Width="30" Click="FindFilm_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="SessionDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Фильм" Binding="{Binding Title}"/>
+                                        <DataGridTextColumn Header="Время начала" Binding="{Binding TimeStart}"/>
+                                        <DataGridTextColumn Header="Время конца" Binding="{Binding TimeEnd}"/>
+                                        <DataGridTextColumn Header="Зал" Binding="{Binding Hall}"/>
+                                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </StackPanel>
                         
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddOnSessionButton_Click"  Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem DockPanel.Dock="Top" Header="Продажа еды" >
                 <TabItem.Content>
                     <Grid>
-
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="10">
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBox Width="100" x:Name="NameFood"></TextBox>
+                                    <Button Width="30" Click="FindUserFood_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                        <DataGridTextColumn Header="Номер телефона" Binding="{Binding Telephone}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <StackPanel Margin="10">
+                                <ComboBox Margin="10"></ComboBox>
+                                <StackPanel Margin="10" Orientation="Horizontal">
+                                    <TextBox Width="100" x:Name="FoodCount"></TextBox>
+                                    <Button Width="30" Click="AddCount_Click"></Button>
+                                </StackPanel>
+                                <DataGrid x:Name="FoodDataGrid" Grid.Row="0" AutoGenerateColumns="False"  SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
+                                        <DataGridTextColumn Header="Count" Binding="{Binding Name}"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Patronymic}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+                            <Button Content="Добавить" Click="AddOrderButton_Click"  Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
