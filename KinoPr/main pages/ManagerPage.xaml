@@ -159,7 +159,7 @@
                                         <Label Style="{DynamicResource Label}" Content="Пароль:" />
                                         <StackPanel Orientation="Horizontal">
                                             <Label Style="{DynamicResource Label}" x:Name="profPassword" Content="*****"  Visibility="Collapsed"/>
-                                            <Label Style="{DynamicResource Label}" x:Name="placeholder" Content="*****" />
+                                            <Label Style="{DynamicResource Label}" x:Name="placeholder" Content="*******" />
                                             <Button Width="30" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource CustomButton}" Click="SeeButton_Click">
                                                 <Image Source="/Img/Eye.png" />
                                             </Button>
