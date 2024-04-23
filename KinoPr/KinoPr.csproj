@@ -123,6 +123,19 @@
     <Compile Include="Session\EditSession.xaml.cs">
       <DependentUpon>EditSession.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Film.cs" />
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Hall.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Order_list.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Session.cs" />
+    <Compile Include="Models\Session_status.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\Type_hall.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="User\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
