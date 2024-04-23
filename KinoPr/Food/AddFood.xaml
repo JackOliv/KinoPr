@@ -22,7 +22,7 @@
         <Button Click="BackButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource CustomButton}">
             <Image Source="/Img/Back.png"  Width="30" Height="30"/>
         </Button>
-        <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Content="Добавление еды"/>
+        <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Content="Добавление еды" FontSize="30"/>
 
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2">
