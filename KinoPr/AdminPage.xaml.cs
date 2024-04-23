@@ -95,6 +95,10 @@ namespace KinoPr
 
 
         //Профиль
+        private void SeeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
 

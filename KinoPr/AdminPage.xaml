@@ -61,7 +61,15 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список пользователей" >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список пользователей" RenderTransformOrigin="0.5,0.5" >
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-1.364"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.476"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -153,7 +161,9 @@
                                         <Label Style="{DynamicResource Label}" x:Name="profPassword" Content="*****"  Visibility="Collapsed"/>
                                         <Label Style="{DynamicResource Label}" x:Name="placeholder" Content="*****" />
                                     </StackPanel>
-
+                                    <Button Width="30" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource CustomButton}" Click="SeeButton_Click">
+                                        <Image Source="/Img/Eye.png" />
+                                    </Button>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel MinWidth="80" >
@@ -172,7 +182,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0">
-                            <Button Style="{DynamicResource Button}" HorizontalAlignment="Left" Click="Change_Click"  Grid.Row="2" Margin="5" Padding="1" Height="35">Изменить профиль</Button>
+                            <Button Style="{DynamicResource Button}" HorizontalAlignment="Left" Click="Change_Click" Grid.Row="2" Margin="5" Padding="1" Height="35">Изменить профиль</Button>
                             <Button Style="{DynamicResource Button}" HorizontalAlignment="Left" Click="Exit_Click"   Grid.Row="2" Margin="5" Padding="1" Height="35">Выйти из профиля</Button>
                         </StackPanel>
                         <Label Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Column="1" x:Name="lowbalans" Content="*Вашего баланса недостаточно чтобы открыть вклад"  Foreground="red" Visibility="Collapsed"/>

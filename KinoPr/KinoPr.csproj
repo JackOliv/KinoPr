@@ -188,7 +188,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Img\Eye.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Img\Serch.png" />
   </ItemGroup>
