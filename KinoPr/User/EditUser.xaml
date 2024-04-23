@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditUser"
-      Background="White">
+      Background="#273043">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,50 +19,52 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Click="BackButton_Click" Width="30" Height="30" Content="" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30">Редактирование пользователя</Label>
+        <Button Click="BackButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource CustomButton}">
+            <Image Source="/Img/Back.png"  Width="30" Height="30"/>
+        </Button>
+        <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30">Редактирование пользователя</Label>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right">
             <StackPanel>
-                <Label>Фамилия</Label>
-                <TextBox x:Name="Surname"></TextBox>
+                <Label Style="{DynamicResource Label}">Фамилия</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Surname"></TextBox>
             </StackPanel>
             <StackPanel>
-                <Label>Логин</Label>
-                <TextBox x:Name="Login"></TextBox>
+                <Label Style="{DynamicResource Label}">Логин</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Login"></TextBox>
             </StackPanel>
             <StackPanel>
-                <Label>Email</Label>
-                <TextBox x:Name="Email"></TextBox>
+                <Label Style="{DynamicResource Label}">Email</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Email"></TextBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel>
-                <Label>Имя</Label>
-                <TextBox x:Name="Name"></TextBox>
+                <Label Style="{DynamicResource Label}">Имя</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Name"></TextBox>
             </StackPanel>
             <StackPanel>
-                <Label>Пароль</Label>
-                <PasswordBox x:Name="Password"></PasswordBox>
+                <Label Style="{DynamicResource Label}">Пароль</Label>
+                <PasswordBox x:Name="Password" Style="{DynamicResource PasswordBox}" ></PasswordBox>
             </StackPanel>
             <StackPanel>
-                <Label>Роль</Label>
-                <ComboBox x:Name="Role"></ComboBox>
+                <Label Style="{DynamicResource Label}">Роль</Label>
+                <ComboBox x:Name="Role" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
             <StackPanel>
-                <Label>Отчество</Label>
-                <TextBox x:Name="Patronymic"></TextBox>
+                <Label Style="{DynamicResource Label}">Отчество</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Patronymic"></TextBox>
             </StackPanel>
             <StackPanel>
-                <Label>Телефон</Label>
-                <TextBox x:Name="Telephone"></TextBox>
+                <Label Style="{DynamicResource Label}">Телефон</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Telephone"></TextBox>
             </StackPanel>
             <StackPanel>
-                <Label>День рождения</Label>
-                <TextBox x:Name="Birht"></TextBox>
+                <Label Style="{DynamicResource Label}">День рождения</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Birht"></TextBox>
             </StackPanel>
         </StackPanel>
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="EditButton_Click">Редактировать</Button>
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="EditButton_Click" Style="{DynamicResource Button}">Редактировать</Button>
     </Grid>
 </Page>

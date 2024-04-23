@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddGenre"
-      Background="White">
+      Background="#273043">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,12 +19,14 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Click="BackButton_Click" Width="30" Height="30" Content="" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30">Добавление Жанра</Label>
+        <Button Click="BackButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource CustomButton}">
+            <Image Source="/Img/Back.png"  Width="30" Height="30"/>
+        </Button>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Style="{DynamicResource Label}">Добавление Жанра</Label>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 90">
-            <Label>Название</Label>
-            <TextBox  Width="100"></TextBox>
+            <Label Style="{DynamicResource Label}">Название</Label>
+            <TextBox   Style="{DynamicResource TextBox}"></TextBox>
         </StackPanel>
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click">Добавить</Button>
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click" Style="{DynamicResource Button}">Добавить</Button>
     </Grid>
 </Page>

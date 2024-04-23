@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddFood"
-      Background="White">
+      Background="#273043">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,25 +19,27 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Click="BackButton_Click" Width="30" Height="30" Content="" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Content="Добавление еды"/>
+        <Button Click="BackButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Style="{DynamicResource CustomButton}">
+            <Image Source="/Img/Back.png"  Width="30" Height="30"/>
+        </Button>
+        <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Content="Добавление еды"/>
 
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2">
-                <StackPanel>
-                    <Label>Название</Label>
-                    <TextBox x:Name="Name"></TextBox>
+            <StackPanel Margin="20">
+                <Label Style="{DynamicResource Label}">Название</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Name"></TextBox>
+                </StackPanel >
+            <StackPanel Margin="20">
+                <Label Style="{DynamicResource Label}">Цена</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Price"></TextBox>
                 </StackPanel>
-                <StackPanel>
-                    <Label>Цена</Label>
-                    <TextBox x:Name="Price"></TextBox>
-                </StackPanel>
-                <StackPanel>
-                    <Label>Граммовка</Label>
-                    <TextBox x:Name="Gram"></TextBox>
+            <StackPanel Margin="20">
+                <Label Style="{DynamicResource Label}">Граммовка</Label>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="Gram"></TextBox>
                 </StackPanel>
             </StackPanel>
-        <ComboBox x:Name="Type" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 60 0 0"></ComboBox>
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click">Добавить</Button> 
+        <ComboBox x:Name="Type" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click" Style="{DynamicResource Button}">Добавить</Button> 
     </Grid>
 </Page>
