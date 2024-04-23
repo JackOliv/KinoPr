@@ -31,6 +31,10 @@ namespace KinoPr
         {
             FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
+        private void ChangePhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
 
