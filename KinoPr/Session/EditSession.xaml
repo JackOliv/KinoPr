@@ -24,27 +24,32 @@
         </Button>
         <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" FontSize="30">Редактирование сеанса</Label>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <StackPanel >
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <StackPanel  Orientation="Horizontal">
                 <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Фильм</Label>
-                    <ComboBox x:Name="Film" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+                    <ComboBox x:Name="film" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
                 </StackPanel>
-                <StackPanel>
-                    <Label Style="{DynamicResource Label}">Время начала</Label>
-                    <TextBox Style="{DynamicResource TextBox}" x:Name="TimeStart"></TextBox>
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Статус</Label>
+                    <ComboBox x:Name="status" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+                </StackPanel>
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Зал</Label>
+                    <ComboBox x:Name="hall" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
                 </StackPanel>
             </StackPanel>
 
 
-            <StackPanel >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                
                 <StackPanel Margin="20">
-                    <Label Style="{DynamicResource Label}">Зал</Label>
-                    <ComboBox x:Name="Hall" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+                    <Label Style="{DynamicResource Label}">Время начала</Label>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="time_start"></TextBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Время конца</Label>
-                    <TextBox Style="{DynamicResource TextBox}" x:Name="TimeEnd"></TextBox>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="time_end"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

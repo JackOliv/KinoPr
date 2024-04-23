@@ -25,21 +25,37 @@
         <Label Style="{DynamicResource Label}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Content="Добавление еды" FontSize="30"/>
 
 
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2">
-            <StackPanel Margin="20">
-                <Label Style="{DynamicResource Label}">Название</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Name"></TextBox>
-                </StackPanel >
-            <StackPanel Margin="20">
-                <Label Style="{DynamicResource Label}">Цена</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Price"></TextBox>
+        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2">
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Название</Label>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="name"></TextBox>
                 </StackPanel>
-            <StackPanel Margin="20">
-                <Label Style="{DynamicResource Label}">Граммовка</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Gram"></TextBox>
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Цена</Label>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="price"></TextBox>
+                </StackPanel >
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Граммовка</Label>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="gram"></TextBox>
                 </StackPanel>
             </StackPanel>
-        <ComboBox x:Name="Type" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 80 0 0" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20">
+                    <Label Style="{DynamicResource Label}">Описание</Label>
+                    <TextBox Style="{DynamicResource TextBox}" x:Name="decription" TextWrapping="Wrap" Height="80" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="1"  Grid.Column="2" HorizontalAlignment="Center">
+                    <Border  BorderThickness="0.5" BorderBrush="#EFF6EE" CornerRadius="10">
+                        <Image MaxWidth="100" MaxHeight="100" x:Name="foodImage" Source="/img/Smile.png" />
+                    </Border>
+                    <Button Margin="0 10" Click="ChangePhotoButton_Click" Style="{DynamicResource Button}">
+                        Изменить
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
         <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click" Style="{DynamicResource Button}">Добавить</Button> 
     </Grid>
 </Page>

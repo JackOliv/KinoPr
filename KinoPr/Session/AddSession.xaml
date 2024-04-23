@@ -30,7 +30,7 @@
                     <Label Style="{DynamicResource Label}">Фильм</Label>
                     <ComboBox x:Name="Film" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Время начала</Label>
                     <TextBox Style="{DynamicResource TextBox}" x:Name="TimeStart"></TextBox>
                 </StackPanel>
@@ -42,7 +42,7 @@
                     <Label Style="{DynamicResource Label}">Зал</Label>
                     <ComboBox x:Name="Hall" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Время конца</Label>
                     <TextBox Style="{DynamicResource TextBox}" x:Name="TimeEnd"></TextBox>
                 </StackPanel>

@@ -26,43 +26,43 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Right">
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Фамилия</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Surname"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="surname"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Логин</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Login"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="login"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Email</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Email"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="email"></TextBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Имя</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Name"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="name"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Пароль</Label>
-                <PasswordBox x:Name="Password" Style="{DynamicResource PasswordBox}"></PasswordBox>
+                <PasswordBox x:Name="password" Style="{DynamicResource PasswordBox}"></PasswordBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Роль</Label>
-                <ComboBox x:Name="Role" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+                <ComboBox x:Name="role_id" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Отчество</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Patronymic"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="patronymic"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Телефон</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Telephone"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="phone_number"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">День рождения</Label>
-                <TextBox Style="{DynamicResource TextBox}" x:Name="Birht"></TextBox>
+                <TextBox Style="{DynamicResource TextBox}" x:Name="birht"></TextBox>
             </StackPanel>
         </StackPanel>
         <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="AddButton_Click" Style="{DynamicResource Button}">Добавить</Button> 
