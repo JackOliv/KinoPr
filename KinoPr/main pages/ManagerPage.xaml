@@ -100,7 +100,7 @@
                             </ComboBox>
                             <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Left">
                                     <Button  Style="{DynamicResource CustomButton}" Click="MinusCount_Click" Margin="10" Background="#273043">
-                                    <Image Source="/Img/Minus.png"  Width="30"/>
+                                    <Image Source="/Img/Minus.png"  Width="30" Height="30"/>
                                 </Button>
                                     <Label x:Name="Count" Content="1" Style="{DynamicResource Label}" FontSize="30" VerticalAlignment="Center" Background="#273043"/>
                                     <Button  Style="{DynamicResource CustomButton}" Click="AddCount_Click" Margin="10" >
