@@ -56,9 +56,21 @@ namespace KinoPr
         {
 
         }
+        private void MinusCount_Click(object sender, RoutedEventArgs e)
+        {
+            if (Convert.ToInt32(Count.Content) > 1)
+            {
+                Count.Content = Convert.ToInt32(Count.Content) - 1;
+            }
+            else MessageBox.Show("Значение не может быть меньше 1");
+        }
         private void AddCount_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Convert.ToInt32(Count.Content) < 5)
+            {
+                Count.Content = Convert.ToInt32(Count.Content) + 1;
+            }
+            else MessageBox.Show("Значение не может быть больше 5");
         }
         private void AddOrderButton_Click(object sender, RoutedEventArgs e)
         {

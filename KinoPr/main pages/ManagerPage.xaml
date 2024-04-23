@@ -91,17 +91,22 @@
                                 </DataGrid>
                             </StackPanel>
                         <StackPanel Margin="10" Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                
                             <ComboBox Margin="10" Style="{StaticResource ComboBoxFlatStyle}" Height="30" HorizontalAlignment="Left" MinWidth="200" FontSize="20">
                                 <ComboBoxItem>da</ComboBoxItem>
                                 <ComboBoxItem>net</ComboBoxItem>
                                 <ComboBoxItem>da</ComboBoxItem>
                             </ComboBox>
                             <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Left">
-                                <TextBox  Style="{DynamicResource TextBox}" Width="200" Height="40" x:Name="FoodCount" FontSize="20"></TextBox>
-
-                                <Button  Style="{DynamicResource CustomButton}" Click="AddCount_Click" Margin="10">
-                                    <Image Source="/Img/Serch.png" Width="30" />
+                                    <Button  Style="{DynamicResource CustomButton}" Click="MinusCount_Click" Margin="10" Background="#273043">
+                                    <Image Source="/Img/Minus.png"  Width="30"/>
                                 </Button>
+                                    <Label x:Name="Count" Content="1" Style="{DynamicResource Label}" FontSize="30" VerticalAlignment="Center" Background="#273043"/>
+                                    <Button  Style="{DynamicResource CustomButton}" Click="AddCount_Click" Margin="10" >
+                                    <Image Source="/Img/Plus.png"  Height="30"/>
+                                </Button>
+                            </StackPanel>
                             </StackPanel>
                             <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
                                 <DataGrid.Columns>
