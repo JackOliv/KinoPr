@@ -31,5 +31,10 @@ namespace KinoPr
         {
             FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
         }
+
+        private void btnlog_Click_1(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+        }
     }
 }

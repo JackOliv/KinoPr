@@ -106,9 +106,8 @@ namespace KinoPr
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
         }
 
-        
     }
 }

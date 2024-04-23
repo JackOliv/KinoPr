@@ -21,7 +21,10 @@
                         <DataGrid x:Name="MoviesDataGrid" Grid.Row="0"  Margin="10" Style="{StaticResource DataGrid}" HorizontalAlignment="Center">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Desctiption}"/>
                                 <DataGridTextColumn Header="Продолжительность" Binding="{Binding Duration}"/>
+                                <DataGridTextColumn Header="Страна" Binding="{Binding Counry}"/>
+                                <DataGridTextColumn Header="Год" Binding="{Binding Year}"/>
                                 <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -106,7 +109,6 @@
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
                                 <DataGridTextColumn Header="Граммовка" Binding="{Binding Gram}"/>
                                 <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                                <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
