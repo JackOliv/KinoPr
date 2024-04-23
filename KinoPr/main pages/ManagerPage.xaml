@@ -106,8 +106,8 @@
                             <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
-                                    <DataGridTextColumn Header="Count" Binding="{Binding Name}"/>
-                                    <DataGridTextColumn Header="Price" Binding="{Binding Patronymic}"/>
+                                    <DataGridTextColumn Header="Количество" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
@@ -157,7 +157,7 @@
                                     </StackPanel>
                                     <StackPanel MinWidth="80">
                                         <Label Style="{DynamicResource Label}" Content="Пароль:" />
-                                        <Label Style="{DynamicResource Label}" x:Name="profPassword" Content="*****"  Visibility="Collapsed"/>
+                                        <Label Style="{DynamicResource Label}" x:Name="profPassword" Content="*******"  Visibility="Collapsed"/>
                                         <Label Style="{DynamicResource Label}" x:Name="placeholder" Content="*****" />
                                     </StackPanel>
                                     <Button Width="30" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource CustomButton}" Click="SeeButton_Click">

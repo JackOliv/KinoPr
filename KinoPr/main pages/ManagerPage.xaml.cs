@@ -71,7 +71,16 @@ namespace KinoPr
         //Профиль
         private void SeeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (profPassword.Visibility == Visibility.Visible)
+            {
+                profPassword.Visibility = Visibility.Collapsed;
+                placeholder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                profPassword.Visibility = Visibility.Visible;
+                placeholder.Visibility = Visibility.Collapsed;
+            }
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
