@@ -25,6 +25,14 @@ namespace KinoPr
         {
             InitializeComponent();
             mainWindow = main;
+            profSurname.Content = Data.currentUser.Surname;
+            profName.Content = Data.currentUser.Name;
+            profPatronymic.Content = Data.currentUser.Patronymic;
+            profTelephone.Content = Data.currentUser.PhoneNumber;
+            profEmail.Content = Data.currentUser.Email;
+            profLogin.Content = Data.currentUser.Login;
+            profPassword.Content = Data.currentUser.Password;
+            profBiht.Content = Data.currentUser.Birth;
         }
 
 
@@ -116,6 +124,7 @@ namespace KinoPr
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            Data.currentUser = null;
             FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
         }
 
