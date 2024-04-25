@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,10 +35,34 @@ namespace KinoPr
             profLogin.Content = Data.currentUser.Login;
             profPassword.Content = Data.currentUser.Password;
             profBiht.Content = Data.currentUser.Birth;
+            LoadMovies();
         }
 
 
         //Список фильмов
+        private async void LoadMovies()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync("http://cinema/api/film");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(responseBody);
+                    MoviesDataGrid.ItemsSource = movieResponse.Data;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при загрузке фильмов: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке фильмов: " + ex.Message);
+            }
+        }
         private void AddMoviesButton_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AddFilm(mainWindow));
@@ -47,10 +73,17 @@ namespace KinoPr
         }
         private void DeleteMoviesButton_Click(object sender, RoutedEventArgs e)
         {
+
         }
+
+        //Список жанров
         private void AddGenreButton_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AddGenre(mainWindow));
+        }
+        private void EditGenreButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new EditGenre(mainWindow));
         }
 
 

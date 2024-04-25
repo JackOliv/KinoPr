@@ -18,21 +18,40 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="MoviesDataGrid" Grid.Row="0"  Margin="10" Style="{StaticResource DataGrid}" HorizontalAlignment="Center">
+                        <DataGrid x:Name="MoviesDataGrid" Grid.Row="0" Margin="10" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
-                                <DataGridTextColumn Header="Описание" Binding="{Binding Desctiption}"/>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
                                 <DataGridTextColumn Header="Продолжительность" Binding="{Binding Duration}"/>
-                                <DataGridTextColumn Header="Страна" Binding="{Binding Counry}"/>
+                                <DataGridTextColumn Header="Страна" Binding="{Binding Country}"/>
                                 <DataGridTextColumn Header="Год" Binding="{Binding Year}"/>
-                                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"/>
+                                <DataGridTextColumn Header="Жанр" Binding="{Binding GenreId}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
                             <Button Content="Добавить" Click="AddMoviesButton_Click" Style="{StaticResource Button}"  Margin="5"/>
                             <Button Content="Редактировать" Click="EditMoviesButton_Click" Style="{StaticResource Button}" Margin="5"/>
                             <Button Content="Удалить" Click="DeleteMoviesButton_Click" Style="{StaticResource Button}" Margin="5"/>
-                            <Button Content="Добавить жанр" Click="AddGenreButton_Click" Style="{StaticResource Button}" Margin="5"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список жанров"  >
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddGenreButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditGenreButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
@@ -104,7 +123,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
+                        <DataGrid x:Name="GenreDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
                                 <DataGridTextColumn Header="Граммовка" Binding="{Binding Gram}"/>

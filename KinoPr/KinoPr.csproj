@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Film\EditGenre.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Main pages\AutorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +115,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Data.cs" />
+    <Compile Include="Film\EditGenre.xaml.cs">
+      <DependentUpon>EditGenre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Main pages\AutorizationPage.xaml.cs">
       <DependentUpon>AutorizationPage.xaml</DependentUpon>
     </Compile>
@@ -128,7 +135,7 @@
       <DependentUpon>EditSession.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Film.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Hall.cs" />
     <Compile Include="Models\Order.cs" />
