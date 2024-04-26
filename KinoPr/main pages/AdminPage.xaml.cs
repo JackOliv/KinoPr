@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static KinoPr.Genre;
 
 namespace KinoPr
 {
@@ -36,31 +38,61 @@ namespace KinoPr
             profPassword.Content = Data.currentUser.Password;
             profBiht.Content = Data.currentUser.Birth;
             LoadMovies();
+            LoadGenre();
         }
 
 
         //Список фильмов
-        private async void LoadMovies()
+        private async Task LoadMovies()
         {
             try
             {
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("http://cinema/api/film");
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    MovieResponse movieResponse = JsonConvert.DeserializeObject<MovieResponse>(responseBody);
-                    MoviesDataGrid.ItemsSource = movieResponse.Data;
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка при загрузке фильмов: " + response.StatusCode);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(responseBody);
+                        MovieResponse movieResponse = new MovieResponse { Data = movies };
+                        MoviesDataGrid.ItemsSource = movieResponse.Data;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при загрузке фильмов: " + response.StatusCode);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при загрузке фильмов: " + ex.Message);
+            }
+        }
+        private async Task LoadGenre()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/genre");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        List<Genre> movies = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
+                        GenreResponse movieResponse = new GenreResponse { Data = movies };
+                        GenreDataGrid.ItemsSource = movieResponse.Data;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при загрузке Жанров: " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке Жанров: " + ex.Message);
             }
         }
         private void AddMoviesButton_Click(object sender, RoutedEventArgs e)
@@ -69,7 +101,21 @@ namespace KinoPr
         }
         private void EditMoviesButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditFilm(mainWindow));
+            // Получаем выделенный элемент
+            Movie selectedFilm = (Movie)MoviesDataGrid.SelectedItem;
+
+            // Проверяем, что элемент выбран
+            if (selectedFilm != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditFilm(selectedFilm, mainWindow));
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
+           
         }
         private void DeleteMoviesButton_Click(object sender, RoutedEventArgs e)
         {

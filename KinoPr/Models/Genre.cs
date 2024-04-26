@@ -10,5 +10,9 @@ namespace KinoPr
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public class GenreResponse
+        {
+            public List<Genre> Data { get; set; }
+        }
     }
 }

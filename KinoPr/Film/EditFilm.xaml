@@ -33,7 +33,8 @@
                 </StackPanel>
                 <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Жанр</Label>
-                    <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="40" Style="{DynamicResource ComboBoxFlatStyle}" x:Name="genre" ></ComboBox>
+                    <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="40" Style="{DynamicResource ComboBoxFlatStyle}" x:Name="genre" >
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="20">
                     <Label Style="{DynamicResource Label}">Продолжительность</Label>

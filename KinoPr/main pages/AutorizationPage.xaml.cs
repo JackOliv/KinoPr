@@ -24,7 +24,7 @@ namespace KinoPr
     {
         
         public MainWindow mainWindow;
-        private const string BaseUrl = "http://cinema/api/login";
+        private const string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
         public User currentUser = new User();
         public AutorizationPage(MainWindow main)
         {

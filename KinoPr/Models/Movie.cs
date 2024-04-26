@@ -15,17 +15,17 @@ namespace KinoPr
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("description")]
-        public string Description { get; set; }
-
         [JsonProperty("duration")]
         public string Duration { get; set; }
 
-        [JsonProperty("country")]
-        public string Country { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
 
         [JsonProperty("year")]
         public int Year { get; set; }
+
+        [JsonProperty("country")]
+        public string Country { get; set; }
 
         [JsonProperty("director")]
         public string Director { get; set; }
@@ -35,6 +35,12 @@ namespace KinoPr
 
         [JsonProperty("photo")]
         public string Photo { get; set; }
+
+        [JsonProperty("created_at")]
+        public string CreatedAt { get; set; }
+
+        [JsonProperty("updated_at")]
+        public string UpdatedAt { get; set; }
     }
     public class MovieResponse
     {
