@@ -89,6 +89,7 @@ namespace KinoPr
 
             }
         }
+
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -107,28 +108,33 @@ namespace KinoPr
                     Photo = selectedMovie.Photo // Пока не обновляем изображение фильма
                 };
 
-                // Преобразуем объект updatedMovie в JSON
-                string json = JsonConvert.SerializeObject(updatedMovie);
-
-                // Отправляем PATCH запрос для обновления данных фильма
                 using (HttpClient client = new HttpClient())
                 {
-                    // Создаем мультипарт контент для отправки изображения и других данных
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
-                    // Добавляем JSON данные
-                    multiContent.Add(new StringContent(json, Encoding.UTF8, "application/json"), "movie");
+                    // Добавляем данные формы в мультипарт контент
+                    multiContent.Add(new StringContent(updatedMovie.Name), "name");
+                    multiContent.Add(new StringContent(updatedMovie.Duration), "duration");
+                    multiContent.Add(new StringContent(updatedMovie.Description), "description");
+                    multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
+                    multiContent.Add(new StringContent(updatedMovie.Country), "country");
+                    multiContent.Add(new StringContent(updatedMovie.Director), "director");
+                    multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
 
-                    // Добавляем изображение
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
-
-                    if (openFileDialog.ShowDialog() == true)
+                    // Если есть новое изображение, добавляем его
+                    if (filmImage.Source != null)
                     {
-                        string imagePath = openFileDialog.FileName;
-                        byte[] imageData = File.ReadAllBytes(imagePath);
+                        BitmapSource bitmapSource = (BitmapSource)filmImage.Source;
+                        byte[] imageData;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            BitmapEncoder encoder = new PngBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                            encoder.Save(ms);
+                            imageData = ms.ToArray();
+                        }
                         ByteArrayContent imageContent = new ByteArrayContent(imageData);
-                       // multiContent.Add(imageContent, "image", Path.GetFileName(imagePath));
+                        multiContent.Add(imageContent, "photo", "film_image.png");
                     }
 
                     HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{selectedMovie.Id}", multiContent);
@@ -151,6 +157,10 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при обновлении фильма: " + ex.Message);
             }
         }
+
+
+
+
 
     }
 }
