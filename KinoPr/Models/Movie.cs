@@ -30,6 +30,8 @@ namespace KinoPr
         [JsonProperty("director")]
         public string Director { get; set; }
 
+        [JsonProperty("genreName")]
+        public string GenreName { get; set; }
         [JsonProperty("genre_id")]
         public int GenreId { get; set; }
 

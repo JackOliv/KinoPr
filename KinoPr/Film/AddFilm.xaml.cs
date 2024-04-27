@@ -43,9 +43,9 @@ namespace KinoPr
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        List<Genre> movies = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
-                        GenreResponse movieResponse = new GenreResponse { Data = movies };
-                        genre.ItemsSource = movieResponse.Data;
+                        List<Genre> genres = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
+                        GenreResponse genreResponse = new GenreResponse { Data = genres };
+                        genre.ItemsSource = genreResponse.Data;
                         genre.DisplayMemberPath = "Name";
                         genre.SelectedValuePath = "Id";
                     }

@@ -34,9 +34,9 @@ namespace KinoPr
             mainWindow = main; 
             LoadGenre();
             genre.DisplayMemberPath = "Name";
-            genre.SelectedValuePath = "Id";
+            genre.SelectedValuePath = "Name";
+            genre.SelectedValue = selectedMovie.GenreName;
             title.Text = selectedMovie.Name;
-            genre.SelectedValue = selectedMovie.GenreId;
             duration.Text = selectedMovie.Duration;
             year.Text = selectedMovie.Year.ToString();
             description.Text = selectedMovie.Description;
@@ -87,7 +87,6 @@ namespace KinoPr
                         List<Genre> movies = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
                         GenreResponse movieResponse = new GenreResponse { Data = movies };
                         genre.ItemsSource = movieResponse.Data;
-                        
                     }
                     else
                     {
@@ -127,7 +126,7 @@ namespace KinoPr
                 {
                     Id = selectedMovie.Id,
                     Name = title.Text,
-                    GenreId = (int)genre.SelectedValue,
+                    GenreName = (string)genre.SelectedValue,
                     Duration = duration.Text,
                     Year = int.Parse(year.Text),
                     Description = description.Text,
@@ -147,7 +146,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
                     multiContent.Add(new StringContent(updatedMovie.Country), "country");
                     multiContent.Add(new StringContent(updatedMovie.Director), "director");
-                    multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
+                    multiContent.Add(new StringContent(updatedMovie.GenreName.ToString()), "genre_id");
 
                     // Если есть новое изображение, добавляем его
                     if (filmImage.Source != null)
