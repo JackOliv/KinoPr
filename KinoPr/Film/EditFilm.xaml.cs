@@ -42,8 +42,36 @@ namespace KinoPr
             description.Text = selectedMovie.Description;
             director.Text = selectedMovie.Director;
             country.Text = selectedMovie.Country;
-            filmImage.Source = new BitmapImage(new Uri(selectedMovie.Photo, UriKind.RelativeOrAbsolute));
-            List genreList = new List();
+            LoadImage();
+        }
+        private async void LoadImage()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/storage/" + selectedMovie.Photo);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Stream stream = await response.Content.ReadAsStreamAsync();
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = stream;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
+
+                        filmImage.Source = bitmapImage;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка загрузки изображения: " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка загрузки изображения: " + ex.Message);
+            }
         }
         private async Task LoadGenre()
         {

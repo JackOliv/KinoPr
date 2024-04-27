@@ -51,7 +51,7 @@
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
                             <Button Style="{StaticResource Button}" Content="Добавить" Click="AddGenreButton_Click" Margin="5"/>
                             <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditGenreButton_Click" Margin="5"/>
-                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteGenreButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>

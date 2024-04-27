@@ -25,7 +25,7 @@
         <Label HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="30" Style="{DynamicResource Label}" FontSize="30" Content="Редактирование Жанра"/>
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 90">
             <Label Style="{DynamicResource Label}">Название</Label>
-            <TextBox   Style="{DynamicResource TextBox}"></TextBox>
+            <TextBox   Style="{DynamicResource TextBox}" x:Name="genreName"></TextBox>
         </StackPanel>
         <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="EditButton_Click" Style="{DynamicResource Button}">Редактировать</Button>
     </Grid>

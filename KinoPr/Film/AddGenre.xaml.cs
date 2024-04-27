@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,9 +32,42 @@ namespace KinoPr
         {
             FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Создаем объект Genre для добавления данных
+                Genre newGenre = new Genre
+                {
+                    Name = genreName.Text
+                };
 
+                using (HttpClient client = new HttpClient())
+                {
+                    MultipartFormDataContent multiContent = new MultipartFormDataContent();
+
+                    // Добавляем данные формы в мультипарт контент
+                    multiContent.Add(new StringContent(newGenre.Name), "name");
+
+                    HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/genre", multiContent);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Жанр успешно добавлен!");
+                        // Переходим на страницу администратора после успешного добавления
+                        FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+                    }
+                    else
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show("Ошибка при добавлении жанра: " + response.StatusCode + ", " + responseBody);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при добавлении жанра: " + ex.Message);
+            }
         }
     }
 }

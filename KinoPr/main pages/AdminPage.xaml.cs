@@ -117,9 +117,46 @@ namespace KinoPr
             }
            
         }
-        private void DeleteMoviesButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteMoviesButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Получаем выделенный элемент
+                Movie selectedFilm = (Movie)MoviesDataGrid.SelectedItem;
 
+                // Проверяем, что элемент выбран
+                if (selectedFilm != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот фильм?", "Подтверждение удаления", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/film/{selectedFilm.Id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Фильм успешно удален!");
+                                // Обновляем список фильмов после удаления
+                                await LoadMovies();
+                            }
+                            else
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show("Ошибка при удалении фильма: " + response.StatusCode + ", " + responseBody);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите элемент для удаления.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при удалении фильма: " + ex.Message);
+            }
         }
 
         //Список жанров
@@ -129,9 +166,61 @@ namespace KinoPr
         }
         private void EditGenreButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditGenre(mainWindow));
-        }
+            // Получаем выделенный элемент
+            Genre selectedGenre = (Genre)GenreDataGrid.SelectedItem;
 
+            // Проверяем, что элемент выбран
+            if (selectedGenre != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditGenre(selectedGenre, mainWindow));
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
+        }
+        private async void DeleteGenreButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Получаем выделенный элемент
+                Genre selectedGenre = (Genre)GenreDataGrid.SelectedItem;
+
+                // Проверяем, что элемент выбран
+                if (selectedGenre != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот жанр?", "Подтверждение удаления", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/genre/{selectedGenre.Id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Жанр успешно удален!");
+                                // Обновляем список жанров после удаления
+                                await LoadGenre();
+                            }
+                            else
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show("Ошибка при удалении жанра: " + response.StatusCode + ", " + responseBody);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите элемент для удаления.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при удалении жанра: " + ex.Message);
+            }
+        }
 
 
         //Список сеансов
