@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static KinoPr.Genre;
 using static KinoPr.Session;
+using static KinoPr.User;
 
 namespace KinoPr
 {
@@ -30,17 +31,18 @@ namespace KinoPr
         {
             InitializeComponent();
             mainWindow = main;
-            profSurname.Content = Data.currentUser.Surname;
-            profName.Content = Data.currentUser.Name;
-            profPatronymic.Content = Data.currentUser.Patronymic;
-            profTelephone.Content = Data.currentUser.PhoneNumber;
-            profEmail.Content = Data.currentUser.Email;
-            profLogin.Content = Data.currentUser.Login;
-            profPassword.Content = Data.currentUser.Password;
-            profBiht.Content = Data.currentUser.Birth;
+            profSurname.Content = Data.currentUser.surname;
+            profName.Content = Data.currentUser.name;
+            profPatronymic.Content = Data.currentUser.patronymic;
+            profTelephone.Content = Data.currentUser.phone_number;
+            profEmail.Content = Data.currentUser.email;
+            profLogin.Content = Data.currentUser.login;
+            profPassword.Content = Data.currentUser.password;
+            profBiht.Content = Data.currentUser.birth;
             LoadMovies();
             LoadGenre();
             LoadSessions();
+            LoadUsers();
         }
 
 
@@ -123,7 +125,32 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при загрузке сеансов: " + ex.Message);
             }
         }
+        private async Task LoadUsers()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/users");
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        List<User> users = JsonConvert.DeserializeObject<List<User>>(responseBody);
+                        UserResponse userResponse = new UserResponse { Data = users };
+                        UsersDataGrid.ItemsSource = userResponse.Data;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при загрузке пользователей: " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке пользователей: " + ex.Message);
+            }
+        }
         private void AddMoviesButton_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AddFilm(mainWindow));

@@ -10,5 +10,10 @@ namespace KinoPr
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public class SessionStatusResponse
+        {
+            public List<Session_status> Data { get; set; }
+        }
     }
+
 }

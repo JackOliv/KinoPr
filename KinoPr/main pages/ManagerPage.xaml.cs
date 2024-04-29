@@ -25,14 +25,14 @@ namespace KinoPr
         {
             InitializeComponent();
             mainWindow = main;
-            profSurname.Content = Data.currentUser.Surname;
-            profName.Content = Data.currentUser.Name;
-            profPatronymic.Content = Data.currentUser.Patronymic;
-            profTelephone.Content = Data.currentUser.PhoneNumber;
-            profEmail.Content = Data.currentUser.Email;
-            profLogin.Content = Data.currentUser.Login;
-            profPassword.Content = Data.currentUser.Password;
-            profBiht.Content = Data.currentUser.Birth;
+            profSurname.Content = Data.currentUser.surname;
+            profName.Content = Data.currentUser.name;
+            profPatronymic.Content = Data.currentUser.patronymic;
+            profTelephone.Content = Data.currentUser.phone_number;
+            profEmail.Content = Data.currentUser.email;
+            profLogin.Content = Data.currentUser.login;
+            profPassword.Content = Data.currentUser.password;
+            profBiht.Content = Data.currentUser.birth;
         }
 
 

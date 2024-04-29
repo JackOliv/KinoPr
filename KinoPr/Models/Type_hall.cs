@@ -10,5 +10,9 @@ namespace KinoPr
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public class TypeHallResponse
+        {
+            public List<Type_hall> Data { get; set; }
+        }
     }
 }

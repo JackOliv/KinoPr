@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static KinoPr.Genre;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace KinoPr
 {
@@ -31,11 +32,10 @@ namespace KinoPr
         {
             InitializeComponent();
             this.selectedMovie = selectedMovie;
-            mainWindow = main; 
+            mainWindow = main;
             LoadGenre();
             genre.DisplayMemberPath = "Name";
-            genre.SelectedValuePath = "Name";
-            genre.SelectedValue = selectedMovie.GenreName;
+            genre.SelectedValuePath = "Id";
             title.Text = selectedMovie.Name;
             duration.Text = selectedMovie.Duration;
             year.Text = selectedMovie.Year.ToString();
@@ -84,9 +84,14 @@ namespace KinoPr
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        List<Genre> movies = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
-                        GenreResponse movieResponse = new GenreResponse { Data = movies };
-                        genre.ItemsSource = movieResponse.Data;
+                        List<Genre> genres = JsonConvert.DeserializeObject<List<Genre>>(responseBody);
+                        Genre selectedGenre = genres.FirstOrDefault(g => g.Name == selectedMovie.GenreName);
+                        if (selectedGenre != null)
+                        {
+                            selectedMovie.GenreId = selectedGenre.Id;
+                            genre.ItemsSource = genres;
+                            genre.SelectedValue = selectedMovie.GenreId; // Устанавливаем GenreId в качестве выбранного значения
+                        }
                     }
                     else
                     {
@@ -121,12 +126,21 @@ namespace KinoPr
         {
             try
             {
-                // Создаем объект Movie для обновления данных
+                // Проверяем, что все необходимые поля заполнены
+                if (string.IsNullOrWhiteSpace(title.Text) || genre.SelectedValue == null || string.IsNullOrWhiteSpace(duration.Text) ||
+                    string.IsNullOrWhiteSpace(year.Text) || string.IsNullOrWhiteSpace(description.Text) ||
+                    string.IsNullOrWhiteSpace(director.Text) || string.IsNullOrWhiteSpace(country.Text))
+                {
+                    MessageBox.Show("Пожалуйста, заполните все поля");
+                    return;
+                }
+
+                // Создаем объект фильма для обновления данных
                 Movie updatedMovie = new Movie
                 {
                     Id = selectedMovie.Id,
                     Name = title.Text,
-                    GenreName = (string)genre.SelectedValue,
+                    GenreId = (int)genre.SelectedValue,
                     Duration = duration.Text,
                     Year = int.Parse(year.Text),
                     Description = description.Text,
@@ -146,7 +160,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
                     multiContent.Add(new StringContent(updatedMovie.Country), "country");
                     multiContent.Add(new StringContent(updatedMovie.Director), "director");
-                    multiContent.Add(new StringContent(updatedMovie.GenreName.ToString()), "genre_id");
+                    multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
 
                     // Если есть новое изображение, добавляем его
                     if (filmImage.Source != null)
@@ -155,12 +169,13 @@ namespace KinoPr
                         byte[] imageData;
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            BitmapEncoder encoder = new PngBitmapEncoder();
+                            BitmapEncoder encoder = new PngBitmapEncoder(); // Используйте нужный тип кодирования в зависимости от типа изображения
                             encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                             encoder.Save(ms);
                             imageData = ms.ToArray();
                         }
                         ByteArrayContent imageContent = new ByteArrayContent(imageData);
+                        imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/png"); // Укажите правильный Content-Type
                         multiContent.Add(imageContent, "photo", "film_image.png");
                     }
 
@@ -184,7 +199,6 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при обновлении фильма: " + ex.Message);
             }
         }
-
 
 
 

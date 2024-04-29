@@ -62,19 +62,19 @@ namespace KinoPr
                         var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseContent);
 
                         // Заполняем данные текущего пользователя
-                        currentUser.Name = responseData.data.name;
-                        currentUser.Surname = responseData.data.surname;
-                        currentUser.Patronymic = responseData.data.patronymic;
-                        currentUser.PhoneNumber = responseData.data.phone_number;
-                        currentUser.Birth = responseData.data.birth;
-                        currentUser.Login = responseData.data.login;
-                        currentUser.Password = responseData.data.password;
-                        currentUser.Email = responseData.data.email;
-                        currentUser.ApiToken = responseData.data.api_token;
-                        currentUser.RoleId = responseData.data.role_id;
+                        currentUser.name = responseData.data.name;
+                        currentUser.surname = responseData.data.surname;
+                        currentUser.patronymic = responseData.data.patronymic;
+                        currentUser.phone_number = responseData.data.phone_number;
+                        currentUser.birth = responseData.data.birth;
+                        currentUser.login = responseData.data.login;
+                        currentUser.password = responseData.data.password;
+                        currentUser.email = responseData.data.email;
+                        currentUser.api_token = responseData.data.api_token;
+                        currentUser.role_id = responseData.data.role_id;
                         Data.currentUser = currentUser;
                         // В зависимости от роли пользователя выполняем различные действия
-                        switch (currentUser.RoleId)
+                        switch (currentUser.role_id)
                         {
                             case 2:
                                 FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
