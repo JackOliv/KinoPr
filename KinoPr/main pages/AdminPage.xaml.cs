@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static KinoPr.Genre;
+using static KinoPr.Session;
 
 namespace KinoPr
 {
@@ -39,6 +40,7 @@ namespace KinoPr
             profBiht.Content = Data.currentUser.Birth;
             LoadMovies();
             LoadGenre();
+            LoadSessions();
         }
 
 
@@ -95,6 +97,33 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при загрузке Жанров: " + ex.Message);
             }
         }
+        private async Task LoadSessions()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
+                        SessionResponse sessionResponse = new SessionResponse { Data = sessions };
+                        SessionDataGrid.ItemsSource = sessionResponse.Data;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при загрузке сеансов: " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке сеансов: " + ex.Message);
+            }
+        }
+
         private void AddMoviesButton_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AddFilm(mainWindow));
@@ -230,7 +259,20 @@ namespace KinoPr
         }
         private void EditSessionButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditSession(mainWindow));
+            // Получаем выделенный элемент
+            Session selectedSession = (Session)SessionDataGrid.SelectedItem;
+
+            // Проверяем, что элемент выбран
+            if (selectedSession != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditSession(selectedSession, mainWindow));
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
         }
         private void DeleteSessionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -245,7 +287,20 @@ namespace KinoPr
         }
         private void EditUserButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditUser(mainWindow));
+            // Получаем выделенный элемент
+            User selectedUser = (User)UsersDataGrid.SelectedItem;
+
+            // Проверяем, что элемент выбран
+            if (selectedUser != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditUser(selectedUser, mainWindow));
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
         }
         private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
@@ -260,7 +315,20 @@ namespace KinoPr
         }
         private void EditFoodButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new AddFood(mainWindow));
+            // Получаем выделенный элемент
+            Product selectedProduct = (Product)FoodDataGrid.SelectedItem;
+
+            // Проверяем, что элемент выбран
+            if (selectedProduct != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditFood(selectedProduct, mainWindow));
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
         }
         private void DeleteFoodButton_Click(object sender, RoutedEventArgs e)
         {

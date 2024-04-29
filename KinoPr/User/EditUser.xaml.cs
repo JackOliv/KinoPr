@@ -21,9 +21,11 @@ namespace KinoPr
     public partial class EditUser : Page
     {
         public MainWindow mainWindow;
-        public EditUser(MainWindow main)
+        private User selectedUser;
+        public EditUser(User selectedUser, MainWindow main)
         {
             InitializeComponent();
+            this.selectedUser = selectedUser;
             mainWindow = main;
         }
 

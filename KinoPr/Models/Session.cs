@@ -9,17 +9,17 @@ namespace KinoPr
     public class Session
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime Birth { get; set; }
-        public string Login { get; set; }
-        public string Email { get; set; }
-        public string ApiToken { get; set; }
-        public int RoleId { get; set; }
+        public DateTime time_start { get; set; }
+        public DateTime time_end { get; set; }
+        public string sessions { get; set; }
+        public string film_id { get; set; }
+        public string type_hall_id { get; set; }
+        public string created_at { get; set; }
+        public string updated_at { get; set; }
 
-        // Не включаем пароль в вывод
-        public string Password { get; set; }
+        public class SessionResponse
+        {
+            public List<Session> Data { get; set; }
+        }
     }
 }

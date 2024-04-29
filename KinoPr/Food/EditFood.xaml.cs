@@ -21,9 +21,11 @@ namespace KinoPr
     public partial class EditFood : Page
     {
         public MainWindow mainWindow;
-        public EditFood(MainWindow main)
+        private Product selectedProduct;
+        public EditFood(Product selectedProduct, MainWindow main)
         {
             InitializeComponent();
+            this.selectedProduct = selectedProduct;
             mainWindow = main;
         }
 
