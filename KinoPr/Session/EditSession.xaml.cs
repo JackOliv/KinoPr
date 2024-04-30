@@ -44,7 +44,7 @@ namespace KinoPr
             status.SelectedValue = selectedSession.sessions;
             hall.DisplayMemberPath = "Id";
             hall.SelectedValuePath = "Id";
-            hall.SelectedValue = selectedSession.hall_id;
+            hall.SelectedValue = selectedSession.hall;
             time_start.Text = selectedSession.time_start.ToString();
             time_end.Text = selectedSession.time_end.ToString();
         }
@@ -162,7 +162,7 @@ namespace KinoPr
                     time_end = endTime,
                     session_status_id = ((Session_status)status.SelectedItem).Id,
                     film_id = ((Movie)film.SelectedItem).Id,
-                    hall_id = ((Hall)hall.SelectedItem).Id
+                    hall = ((Hall)hall.SelectedItem).Id
                 };
 
                 using (HttpClient client = new HttpClient())
@@ -174,7 +174,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
                     multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
                     multiContent.Add(new StringContent(updatedSession.film_id.ToString()), "film_id");
-                    multiContent.Add(new StringContent(updatedSession.hall_id.ToString()), "hall_id");
+                    multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
 
                     HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.Id}", multiContent);
                     if (response.IsSuccessStatusCode)

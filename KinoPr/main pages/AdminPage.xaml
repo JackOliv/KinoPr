@@ -66,7 +66,7 @@
                         <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10"  AutoGenerateColumns="False" CanUserResizeRows="False" UseLayoutRounding="False" ScrollViewer.CanContentScroll="False" CanUserResizeColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фильм" Binding="{Binding film}"/>
-                                <DataGridTextColumn Header="Зал" Binding="{Binding hall_id}"/>
+                                <DataGridTextColumn Header="Зал" Binding="{Binding hall}"/>
                                 <DataGridTextColumn Header="Время начала" Binding="{Binding time_start}"/>
                                 <DataGridTextColumn Header="Время конца" Binding="{Binding time_end}"/>
                                 <DataGridTextColumn Header="Статус" Binding="{Binding sessions}"/>

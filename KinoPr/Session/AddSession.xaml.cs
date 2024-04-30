@@ -108,6 +108,8 @@ namespace KinoPr
                         List<Hall> halls = JsonConvert.DeserializeObject<List<Hall>>(responseBody);
                         HallResponse hallResponse = new HallResponse { Data = halls };
                         hall.ItemsSource = hallResponse.Data;
+                        status.DisplayMemberPath = "Id";
+                        status.SelectedValuePath = "Id";
                     }
                     else
                     {
@@ -152,7 +154,7 @@ namespace KinoPr
                     time_end = endTime,
                     session_status_id = ((Session_status)status.SelectedItem).Id,
                     film_id = ((Movie)film.SelectedItem).Id,
-                    hall_id = ((Hall)hall.SelectedItem).Id
+                    hall = ((Hall)hall.SelectedItem).Id
                 };
 
                 using (HttpClient client = new HttpClient())
@@ -164,7 +166,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                     multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
                     multiContent.Add(new StringContent(newSession.film_id.ToString()), "film_id");
-                    multiContent.Add(new StringContent(newSession.hall_id.ToString()), "hall_id");
+                    multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
 
                     HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
 
