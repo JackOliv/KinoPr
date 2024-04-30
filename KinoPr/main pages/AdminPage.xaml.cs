@@ -320,14 +320,14 @@ namespace KinoPr
 
                             if (response.IsSuccessStatusCode)
                             {
-                                MessageBox.Show("Жанр успешно удален!");
+                                MessageBox.Show("Сеанс успешно удален!");
                                 // Обновляем список жанров после удаления
                                 await LoadSessions();
                             }
                             else
                             {
                                 string responseBody = await response.Content.ReadAsStringAsync();
-                                MessageBox.Show("Ошибка при удалении сессии: " + response.StatusCode + ", " + responseBody);
+                                MessageBox.Show("Ошибка при удалении сеанса: " + response.StatusCode + ", " + responseBody);
                             }
                         }
                     }
@@ -339,7 +339,7 @@ namespace KinoPr
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при удалении сессии: " + ex.Message);
+                MessageBox.Show("Ошибка при удалении сеанса: " + ex.Message);
             }
         }
 
@@ -366,9 +366,46 @@ namespace KinoPr
                 MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
             }
         }
-        private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Получаем выделенный элемент
+                User selectedUser = (User)UsersDataGrid.SelectedItem;
 
+                // Проверяем, что элемент выбран
+                if (selectedUser != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этого пользователя?", "Подтверждение удаления", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/user/delete/{selectedUser.id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Пользователь успешно удален!");
+                                // Обновляем список жанров после удаления
+                                await LoadUsers();
+                            }
+                            else
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show("Ошибка при удалении пользователя: " + response.StatusCode + ", " + responseBody);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите элемент для пользователя.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при удалении сессии: " + ex.Message);
+            }
         }
 
         
