@@ -105,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="User\EditCurrentUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="User\EditUser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +168,9 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="User\AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\EditCurrentUser.xaml.cs">
+      <DependentUpon>EditCurrentUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>

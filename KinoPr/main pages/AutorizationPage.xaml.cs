@@ -25,7 +25,6 @@ namespace KinoPr
         
         public MainWindow mainWindow;
         private const string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-        public User currentUser = new User();
         public AutorizationPage(MainWindow main)
         {
             InitializeComponent();
@@ -62,19 +61,18 @@ namespace KinoPr
                         var responseData = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseContent);
 
                         // Заполняем данные текущего пользователя
-                        currentUser.name = responseData.data.name;
-                        currentUser.surname = responseData.data.surname;
-                        currentUser.patronymic = responseData.data.patronymic;
-                        currentUser.phone_number = responseData.data.phone_number;
-                        currentUser.birth = responseData.data.birth;
-                        currentUser.login = responseData.data.login;
-                        currentUser.password = responseData.data.password;
-                        currentUser.email = responseData.data.email;
-                        currentUser.api_token = responseData.data.api_token;
-                        currentUser.role_id = responseData.data.role_id;
-                        Data.currentUser = currentUser;
+                        Data.currentUser.name = responseData.data.name;
+                        Data.currentUser.surname = responseData.data.surname;
+                        Data.currentUser.patronymic = responseData.data.patronymic;
+                        Data.currentUser.phone_number = responseData.data.phone_number;
+                        Data.currentUser.birth = responseData.data.birth;
+                        Data.currentUser.login = responseData.data.login;
+                        Data.currentUser.password = responseData.data.password;
+                        Data.currentUser.email = responseData.data.email;
+                        Data.currentUser.api_token = responseData.data.api_token;
+                        Data.currentUser.role_id = responseData.data.role_id;
                         // В зависимости от роли пользователя выполняем различные действия
-                        switch (currentUser.role_id)
+                        switch (Data.currentUser.role_id)
                         {
                             case 2:
                                 FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));

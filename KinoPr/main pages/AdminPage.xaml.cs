@@ -419,7 +419,7 @@ namespace KinoPr
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new EditCurrentUser(mainWindow));
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
