@@ -27,6 +27,14 @@ namespace KinoPr
             InitializeComponent();
             this.selectedUser = selectedUser;
             mainWindow = main;
+            surname.Text = selectedUser.surname;
+            name.Text = selectedUser.name;
+            patronymic.Text = selectedUser.patronymic;
+            login.Text = selectedUser.login;
+            password.Text = selectedUser.password;
+            phone_number.Text = selectedUser.phone_number;
+            email.Text = selectedUser.email;
+            birht.Text = selectedUser.birth.ToString();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

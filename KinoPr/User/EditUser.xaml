@@ -44,7 +44,7 @@
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Пароль</Label>
-                <PasswordBox x:Name="password" Style="{DynamicResource PasswordBox}" ></PasswordBox>
+                <TextBox x:Name="password" Style="{DynamicResource TextBox}" ></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Роль</Label>

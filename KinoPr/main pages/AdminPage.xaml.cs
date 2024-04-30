@@ -301,9 +301,46 @@ namespace KinoPr
                 MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
             }
         }
-        private void DeleteSessionButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteSessionButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Получаем выделенный элемент
+                Session selectedSession = (Session)SessionDataGrid.SelectedItem;
 
+                // Проверяем, что элемент выбран
+                if (selectedSession != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот сеанс?", "Подтверждение удаления", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.Id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Жанр успешно удален!");
+                                // Обновляем список жанров после удаления
+                                await LoadSessions();
+                            }
+                            else
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show("Ошибка при удалении сессии: " + response.StatusCode + ", " + responseBody);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите элемент для удаления.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при удалении сессии: " + ex.Message);
+            }
         }
 
 

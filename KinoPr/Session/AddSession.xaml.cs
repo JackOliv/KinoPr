@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static KinoPr.Hall;
 using static KinoPr.Session_status;
 using static KinoPr.Type_hall;
 
@@ -32,7 +33,7 @@ namespace KinoPr
             mainWindow = main;
             LoadMovies();
             LoadStatus();
-            LoadType();
+            LoadHall();
 
         }
         private async Task LoadMovies()
@@ -93,32 +94,30 @@ namespace KinoPr
             }
         }
 
-        private async Task LoadType()
+        private async Task LoadHall()
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/typehall");
+                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/hall");
 
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        List<Type_hall> typehall = JsonConvert.DeserializeObject<List<Type_hall>>(responseBody);
-                        TypeHallResponse typeResponse = new TypeHallResponse { Data = typehall };
-                        hall.ItemsSource = typeResponse.Data;
-                        hall.DisplayMemberPath = "Name";
-                        hall.SelectedValuePath = "Id";
+                        List<Hall> halls = JsonConvert.DeserializeObject<List<Hall>>(responseBody);
+                        HallResponse hallResponse = new HallResponse { Data = halls };
+                        hall.ItemsSource = hallResponse.Data;
                     }
                     else
                     {
-                        MessageBox.Show("Ошибка при загрузке типов зала: " + response.StatusCode);
+                        MessageBox.Show("Ошибка при загрузке зала: " + response.StatusCode);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при загрузке типов зала: " + ex.Message);
+                MessageBox.Show("Ошибка при загрузке зала: " + ex.Message);
             }
         }
 
@@ -127,13 +126,13 @@ namespace KinoPr
             try
             {
                 DateTime startTime, endTime;
-                if (!DateTime.TryParseExact(time_start.Text, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out startTime))
+                if (!DateTime.TryParseExact(time_start.Text, "yyyy-M-d H:m:s", CultureInfo.InvariantCulture, DateTimeStyles.None, out startTime))
                 {
                     MessageBox.Show("Неправильный формат времени начала");
                     return;
                 }
 
-                if (!DateTime.TryParseExact(time_end.Text, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out endTime))
+                if (!DateTime.TryParseExact(time_end.Text, "yyyy-M-d H:m:s", CultureInfo.InvariantCulture, DateTimeStyles.None, out endTime))
                 {
                     MessageBox.Show("Неправильный формат времени окончания");
                     return;
@@ -153,7 +152,7 @@ namespace KinoPr
                     time_end = endTime,
                     session_status_id = ((Session_status)status.SelectedItem).Id,
                     film_id = ((Movie)film.SelectedItem).Id,
-                    type_hall_id = ((Type_hall)hall.SelectedItem).Id
+                    hall_id = ((Hall)hall.SelectedItem).Id
                 };
 
                 using (HttpClient client = new HttpClient())
@@ -161,11 +160,11 @@ namespace KinoPr
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
                     // Добавляем данные формы в мультипарт контент
-                    multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-MM-dd HH:mm:ss")), "time_start");
+                    multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                     multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                     multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
                     multiContent.Add(new StringContent(newSession.film_id.ToString()), "film_id");
-                    multiContent.Add(new StringContent(newSession.type_hall_id.ToString()), "hall_id");
+                    multiContent.Add(new StringContent(newSession.hall_id.ToString()), "hall_id");
 
                     HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
 
