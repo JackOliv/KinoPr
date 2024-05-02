@@ -44,11 +44,11 @@
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Пароль</Label>
-                <PasswordBox x:Name="password" Style="{DynamicResource PasswordBox}"></PasswordBox>
+                <TextBox x:Name="password" Style="{DynamicResource TextBox}"></TextBox>
             </StackPanel>
             <StackPanel>
                 <Label Style="{DynamicResource Label}">Роль</Label>
-                <ComboBox x:Name="role_id" Style="{DynamicResource ComboBoxFlatStyle}" Width="200" Height="40"></ComboBox>
+                <TextBox x:Name="role_id" Style="{DynamicResource TextBox}" Width="200" Height="40"></TextBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left">
