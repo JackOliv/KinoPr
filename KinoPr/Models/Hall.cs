@@ -17,6 +17,8 @@ namespace KinoPr
         public int PlaceQuantity { get; set; }
         [JsonProperty("type_hall_id")]
         public int TypeHallId { get; set; }
+        [JsonProperty("price")]
+        public int Price { get; set; }
         public class HallResponse
         {
             public List<Hall> Data { get; set; }
