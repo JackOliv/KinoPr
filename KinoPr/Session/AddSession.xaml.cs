@@ -108,8 +108,8 @@ namespace KinoPr
                         List<Hall> halls = JsonConvert.DeserializeObject<List<Hall>>(responseBody);
                         HallResponse hallResponse = new HallResponse { Data = halls };
                         hall.ItemsSource = hallResponse.Data;
-                        status.DisplayMemberPath = "Id";
-                        status.SelectedValuePath = "Id";
+                        hall.DisplayMemberPath = "Id";
+                        hall.SelectedValuePath = "Id";
                     }
                     else
                     {
@@ -193,5 +193,6 @@ namespace KinoPr
         {
             FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
         }
+
     }
 }

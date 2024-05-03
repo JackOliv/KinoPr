@@ -56,30 +56,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список сеансов" >
-                <TabItem.Content>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10"  AutoGenerateColumns="False" CanUserResizeRows="False" UseLayoutRounding="False" ScrollViewer.CanContentScroll="False" CanUserResizeColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Фильм" Binding="{Binding film}"/>
-                                <DataGridTextColumn Header="Зал" Binding="{Binding hall}"/>
-                                <DataGridTextColumn Header="Время начала" Binding="{Binding time_start}"/>
-                                <DataGridTextColumn Header="Время конца" Binding="{Binding time_end}"/>
-                                <DataGridTextColumn Header="Статус" Binding="{Binding sessions}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
-                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddSessionButton_Click" Margin="5"/>
-                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditSessionButton_Click" Margin="5"/>
-                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteSessionButton_Click" Margin="5"/>
-                        </StackPanel>
-                    </Grid>
-                </TabItem.Content>
-            </TabItem>
+            
             <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список пользователей" RenderTransformOrigin="0.5,0.5" >
                 <TabItem.RenderTransform>
                     <TransformGroup>
@@ -116,28 +93,7 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список еды"  >
-                <TabItem.Content>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10"  AutoGenerateColumns="False" CanUserResizeRows="False" UseLayoutRounding="False" ScrollViewer.CanContentScroll="False" CanUserResizeColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Название" Binding="{Binding Title}"/>
-                                <DataGridTextColumn Header="Граммовка" Binding="{Binding Gram}"/>
-                                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
-                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddFoodButton_Click" Margin="5"/>
-                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditFoodButton_Click" Margin="5"/>
-                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
-                        </StackPanel>
-                    </Grid>
-                </TabItem.Content>
-            </TabItem>
+            
             <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
                 <TabItem.Content>
                     <Grid>

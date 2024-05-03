@@ -11,118 +11,53 @@
 
     <Grid>
         <TabControl Margin="5" Style="{DynamicResource TabControl}">
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Добавить на сеанс"  Margin="0,5,0,0">
+            
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список сеансов" >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Margin="10">
-                            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-                                    <TextBox Width="200" Height="40" Style="{DynamicResource TextBox}" x:Name="NameUser"></TextBox>
-                                    <Button  Style="{DynamicResource CustomButton}" Click="FindUser_Click" Margin="10">
-                                        <Image Source="/Img/Serch.png" Width="30" />
-                                    </Button>
-                                </StackPanel>
-                            <DataGrid x:Name="UsersDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" HorizontalAlignment="Center">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
-                                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
-                                        <DataGridTextColumn Header="Номер телефона" Binding="{Binding Telephone}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </StackPanel>
-                        <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Center">
-                            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-                                <TextBox Width="200" Height="40" Style="{DynamicResource TextBox}" x:Name="NameFilm"></TextBox>
-                                <Button Style="{DynamicResource CustomButton}" Click="FindFilm_Click" Margin="10">
-                                    <Image Source="/Img/Serch.png" Width="30" />
-                                </Button>
-                            </StackPanel>
-                            <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" HorizontalAlignment="Center">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Фильм" Binding="{Binding Title}"/>
-                                    <DataGridTextColumn Header="Время начала" Binding="{Binding TimeStart}"/>
-                                    <DataGridTextColumn Header="Время конца" Binding="{Binding TimeEnd}"/>
-                                    <DataGridTextColumn Header="Зал" Binding="{Binding Hall}"/>
-                                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOnSessionButton_Click"  Margin="5"/>
+                        <DataGrid x:Name="SessionDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10"  AutoGenerateColumns="False" CanUserResizeRows="False" UseLayoutRounding="False" ScrollViewer.CanContentScroll="False" CanUserResizeColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фильм" Binding="{Binding film}"/>
+                                <DataGridTextColumn Header="Зал" Binding="{Binding hall}"/>
+                                <DataGridTextColumn Header="Время начала" Binding="{Binding time_start}"/>
+                                <DataGridTextColumn Header="Время конца" Binding="{Binding time_end}"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding sessions}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddSessionButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditSessionButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteSessionButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Продажа еды" >
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Top" Header="Список еды"  >
                 <TabItem.Content>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                            <StackPanel Margin="10" >
-                                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-                                <TextBox Style="{DynamicResource TextBox}" Width="200" Height="40" x:Name="NameFood" FontSize="20" ></TextBox>
-
-                                <Button  Style="{DynamicResource CustomButton}" Click="FindUserFood_Click" Margin="10">
-                                        <Image Source="/Img/Serch.png" Width="30" />
-                                    </Button>
-                                </StackPanel>
-                            <DataGrid x:Name="UserFoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
-                                        <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
-                                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
-                                        <DataGridTextColumn Header="Номер телефона" Binding="{Binding Telephone}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </StackPanel>
-                        <StackPanel Margin="10" Grid.Column="1">
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                
-                            <ComboBox Margin="10" Style="{StaticResource ComboBoxFlatStyle}" Height="30"  MinWidth="200" FontSize="20">
-                                <ComboBoxItem>da</ComboBoxItem>
-                                <ComboBoxItem>net</ComboBoxItem>
-                                <ComboBoxItem>da</ComboBoxItem>
-                            </ComboBox>
-                            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <Button  Style="{DynamicResource CustomButton}" Click="MinusCount_Click" Margin="10" Background="#273043">
-                                    <Image Source="/Img/Minus.png"  Width="30" Height="30"/>
-                                </Button>
-                                    <Label x:Name="Count" Content="1" Style="{DynamicResource Label}" FontSize="30" VerticalAlignment="Center" Background="#273043"/>
-                                    <Button  Style="{DynamicResource CustomButton}" Click="AddCount_Click" Margin="10" >
-                                    <Image Source="/Img/Plus.png"  Height="30"/>
-                                </Button>
-                            </StackPanel>
-                            </StackPanel>
-                            <DataGrid x:Name="FoodDataGrid" Grid.Row="0" Style="{DynamicResource DataGrid}" MinHeight="100" HorizontalAlignment="Center">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Название" Binding="{Binding Surname}"/>
-                                    <DataGridTextColumn Header="Количество" Binding="{Binding Count}"/>
-                                    <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="10" HorizontalAlignment="Center">
-                            <Button Style="{DynamicResource Button}" Content="Добавить" Click="AddOrderButton_Click"  Margin="5" />
+                        <DataGrid x:Name="ProductDataGrid" Grid.Row="0" Style="{StaticResource DataGrid}" HorizontalAlignment="Center" Margin="10"  AutoGenerateColumns="False" CanUserResizeRows="False" UseLayoutRounding="False" ScrollViewer.CanContentScroll="False" CanUserResizeColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Граммовка" Binding="{Binding Mass}"/>
+                                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource Button}" Content="Добавить" Click="AddFoodButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Редактировать" Click="EditFoodButton_Click" Margin="5"/>
+                            <Button Style="{StaticResource Button}" Content="Удалить" Click="DeleteFoodButton_Click" Margin="5"/>
                         </StackPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-
             <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
                 <TabItem.Content>
                     <Grid>

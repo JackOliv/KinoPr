@@ -41,7 +41,6 @@ namespace KinoPr
             profBiht.Content = Data.currentUser.birth;
             LoadMovies();
             LoadGenre();
-            LoadSessions();
             LoadUsers();
         }
 
@@ -99,32 +98,7 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при загрузке Жанров: " + ex.Message);
             }
         }
-        private async Task LoadSessions()
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
-                        SessionResponse sessionResponse = new SessionResponse { Data = sessions };
-                        SessionDataGrid.ItemsSource = sessionResponse.Data;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка при загрузке сеансов: " + response.StatusCode);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при загрузке сеансов: " + ex.Message);
-            }
-        }
+        
         private async Task LoadUsers()
         {
             try
@@ -279,69 +253,7 @@ namespace KinoPr
         }
 
 
-        //Список сеансов
-        private void AddSessionButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.MainFrame.Navigate(new AddSession(mainWindow));
-        }
-        private void EditSessionButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Получаем выделенный элемент
-            Session selectedSession = (Session)SessionDataGrid.SelectedItem;
-
-            // Проверяем, что элемент выбран
-            if (selectedSession != null)
-            {
-                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
-                FrameManager.MainFrame.Navigate(new EditSession(selectedSession, mainWindow));
-
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
-            }
-        }
-        private async void DeleteSessionButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Получаем выделенный элемент
-                Session selectedSession = (Session)SessionDataGrid.SelectedItem;
-
-                // Проверяем, что элемент выбран
-                if (selectedSession != null)
-                {
-                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот сеанс?", "Подтверждение удаления", MessageBoxButton.YesNo);
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        using (HttpClient client = new HttpClient())
-                        {
-                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.Id}");
-
-                            if (response.IsSuccessStatusCode)
-                            {
-                                MessageBox.Show("Сеанс успешно удален!");
-                                // Обновляем список жанров после удаления
-                                await LoadSessions();
-                            }
-                            else
-                            {
-                                string responseBody = await response.Content.ReadAsStringAsync();
-                                MessageBox.Show("Ошибка при удалении сеанса: " + response.StatusCode + ", " + responseBody);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Пожалуйста, выберите элемент для удаления.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при удалении сеанса: " + ex.Message);
-            }
-        }
+        
 
 
         //Список пользователей
@@ -409,32 +321,7 @@ namespace KinoPr
         }
 
         
-        //Список пользователей
-        private void AddFoodButton_Click(object sender, RoutedEventArgs e)
-        {
-            FrameManager.MainFrame.Navigate(new AddFood(mainWindow));
-        }
-        private void EditFoodButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Получаем выделенный элемент
-            Product selectedProduct = (Product)FoodDataGrid.SelectedItem;
-
-            // Проверяем, что элемент выбран
-            if (selectedProduct != null)
-            {
-                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
-                FrameManager.MainFrame.Navigate(new EditFood(selectedProduct, mainWindow));
-
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
-            }
-        }
-        private void DeleteFoodButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
 
 

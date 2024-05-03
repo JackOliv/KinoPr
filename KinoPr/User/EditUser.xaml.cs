@@ -83,7 +83,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(updatedUser.email), "email");
                     multiContent.Add(new StringContent(updatedUser.role_id.ToString()), "role_id");
 
-                    HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/user/update", multiContent);
+                    HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/user/update/{selectedUser.id}", multiContent);
 
                     if (response.IsSuccessStatusCode)
                     {
