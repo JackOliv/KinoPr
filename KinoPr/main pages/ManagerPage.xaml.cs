@@ -73,24 +73,33 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+                    HttpResponseMessage sessionResponse = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+                    HttpResponseMessage movieResponse = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
 
-                    if (response.IsSuccessStatusCode)
+                    if (sessionResponse.IsSuccessStatusCode && movieResponse.IsSuccessStatusCode)
                     {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
-                        SessionResponse sessionResponse = new SessionResponse { Data = sessions };
-                        SessionDataGrid.ItemsSource = sessionResponse.Data;
+                        string sessionResponseBody = await sessionResponse.Content.ReadAsStringAsync();
+                        string movieResponseBody = await movieResponse.Content.ReadAsStringAsync();
+
+                        List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(sessionResponseBody);
+                        List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(movieResponseBody);
+
+                        foreach (var session in sessions)
+                        {
+                            session.FilmName = movies.FirstOrDefault(m => m.Id == session.FilmId)?.Name;
+                        }
+
+                        SessionDataGrid.ItemsSource = sessions;
                     }
                     else
                     {
-                        MessageBox.Show("Ошибка при загрузке сеансов: " + response.StatusCode);
+                        MessageBox.Show("Ошибка при загрузке сеансов или фильмов.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при загрузке сеансов: " + ex.Message);
+                MessageBox.Show("Ошибка при загрузке сеансов или фильмов: " + ex.Message);
             }
         }
 
@@ -131,7 +140,7 @@ namespace KinoPr
                     {
                         using (HttpClient client = new HttpClient())
                         {
-                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.Id}");
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.id}");
 
                             if (response.IsSuccessStatusCode)
                             {
@@ -206,13 +215,22 @@ namespace KinoPr
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditCurrentUser(mainWindow));
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите изменить данные профиля?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                FrameManager.MainFrame.Navigate(new EditCurrentUser(mainWindow));
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Data.currentUser = null;
-            FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти из профиля?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Data.currentUser = new User();
+                FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
+            }
+
         }
     }
 }

@@ -37,8 +37,8 @@ namespace KinoPr
             LoadStatus();
             LoadHall();
             film.DisplayMemberPath = "Name";
-            film.SelectedValuePath = "Name";
-            film.SelectedValue = selectedSession.film;
+            film.SelectedValuePath = "Id";
+            film.SelectedValue = selectedSession.FilmId;
             status.DisplayMemberPath = "Name";
             status.SelectedValuePath = "Name";
             status.SelectedValue = selectedSession.sessions;
@@ -128,7 +128,7 @@ namespace KinoPr
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -157,11 +157,11 @@ namespace KinoPr
                 // Создаем объект сеанса для обновления данных
                 Session updatedSession = new Session
                 {
-                    Id = selectedSession.Id,
+                    id = selectedSession.id,
                     time_start = startTime,
                     time_end = endTime,
                     session_status_id = ((Session_status)status.SelectedItem).Id,
-                    film_id = ((Movie)film.SelectedItem).Id,
+                    FilmId = ((Movie)film.SelectedItem).Id,
                     hall = ((Hall)hall.SelectedItem).Id
                 };
 
@@ -173,15 +173,15 @@ namespace KinoPr
                     multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                     multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
                     multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
-                    multiContent.Add(new StringContent(updatedSession.film_id.ToString()), "film_id");
+                    multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
                     multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
 
-                    HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.Id}", multiContent);
+                    HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{selectedSession.id}", multiContent);
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Сеанс успешно обновлен!");
                         // Переходим на страницу администратора после успешного обновления
-                        FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+                        FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
                     }
                     else
                     {

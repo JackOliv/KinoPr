@@ -320,11 +320,6 @@ namespace KinoPr
             }
         }
 
-        
-       
-
-
-
 
         //Профиль
         private void SeeButton_Click(object sender, RoutedEventArgs e)
@@ -343,13 +338,22 @@ namespace KinoPr
         }
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditCurrentUser(mainWindow));
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите изменить данные профиля?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                FrameManager.MainFrame.Navigate(new EditCurrentUser(mainWindow));
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Data.currentUser = null;
-            FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
+            MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите выйти из профиля?", "Подтверждение действия", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Data.currentUser = new User();
+                FrameManager.MainFrame.Navigate(new AutorizationPage(mainWindow));
+            }
+           
         }
 
     }

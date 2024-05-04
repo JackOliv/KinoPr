@@ -153,7 +153,7 @@ namespace KinoPr
                     time_start = startTime,
                     time_end = endTime,
                     session_status_id = ((Session_status)status.SelectedItem).Id,
-                    film_id = ((Movie)film.SelectedItem).Id,
+                    FilmId = ((Movie)film.SelectedItem).Id,
                     hall = ((Hall)hall.SelectedItem).Id
                 };
 
@@ -165,7 +165,7 @@ namespace KinoPr
                     multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                     multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                     multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
-                    multiContent.Add(new StringContent(newSession.film_id.ToString()), "film_id");
+                    multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
                     multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
 
                     HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
@@ -174,7 +174,7 @@ namespace KinoPr
                     {
                         MessageBox.Show("Сеанс успешно добавлен!");
                         // Переходим на страницу администратора после успешного добавления
-                        FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+                        FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
                     }
                     else
                     {
@@ -191,7 +191,7 @@ namespace KinoPr
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
         }
 
     }

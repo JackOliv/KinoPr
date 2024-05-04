@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.Globalization;
 
 namespace KinoPr
 {
@@ -73,7 +74,7 @@ namespace KinoPr
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
         }
 
         private void ChangePhotoButton_Click(object sender, RoutedEventArgs e)
@@ -110,7 +111,7 @@ namespace KinoPr
 
                     // Добавляем данные формы в мультипарт контент
                     multiContent.Add(new StringContent(updatedProduct.Name), "name");
-                    multiContent.Add(new StringContent(updatedProduct.Price.ToString()), "price");
+                    multiContent.Add(new StringContent(updatedProduct.Price.ToString(CultureInfo.InvariantCulture)), "price");
                     multiContent.Add(new StringContent(updatedProduct.Mass.ToString()), "mass");
 
                     // Если есть новое изображение, добавляем его
