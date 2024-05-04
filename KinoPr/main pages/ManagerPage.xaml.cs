@@ -191,12 +191,48 @@ namespace KinoPr
                 MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
             }
         }
-        private void DeleteFoodButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteFoodButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Получаем выделенный элемент
+                Product selectedProduct = (Product)ProductDataGrid.SelectedItem;
+
+                // Проверяем, что элемент выбран
+                if (selectedProduct != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот продукт?", "Подтверждение удаления", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/product/{selectedProduct.Id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Сеанс успешно удален!");
+                                // Обновляем список жанров после удаления
+                                await LoadProducts();
+                            }
+                            else
+                            {
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show("Ошибка при удалении продукта: " + response.StatusCode + ", " + responseBody);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите элемент для удаления.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при удалении продукта: " + ex.Message);
+            }
 
         }
-
-
 
         //Профиль
         private void SeeButton_Click(object sender, RoutedEventArgs e)
