@@ -50,6 +50,7 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/storage/" + selectedMovie.Photo);
                     if (response.IsSuccessStatusCode)
                     {
@@ -79,6 +80,7 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/genre");
 
                     if (response.IsSuccessStatusCode)
@@ -151,6 +153,7 @@ namespace KinoPr
 
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
                     // Добавляем данные формы в мультипарт контент

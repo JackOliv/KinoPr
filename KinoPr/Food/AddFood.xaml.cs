@@ -47,6 +47,7 @@ namespace KinoPr
 
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
                     // Добавляем данные формы в мультипарт контент

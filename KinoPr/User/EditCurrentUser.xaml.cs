@@ -40,7 +40,15 @@ namespace KinoPr
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            if(Data.currentUser.role_id == 3)
+            {
             FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+
+            }
+            else
+            {
+                FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+            }
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -93,7 +101,15 @@ namespace KinoPr
                         Data.currentUser.birth = DateTime.Parse(birht.Text);
                         Data.currentUser.email = email.Text;
                         Data.currentUser.phone_number = phone_number.Text;
-                        FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+                        if (Data.currentUser.role_id == 3)
+                        {
+                            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+
+                        }
+                        else
+                        {
+                            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+                        }
                     }
                     else
                     {

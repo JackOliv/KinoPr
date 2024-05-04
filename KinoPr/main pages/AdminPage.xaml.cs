@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
 
                     if (response.IsSuccessStatusCode)
@@ -78,6 +80,7 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/genre");
 
                     if (response.IsSuccessStatusCode)
@@ -105,10 +108,12 @@ namespace KinoPr
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/users");
 
                     if (response.IsSuccessStatusCode)
                     {
+
                         string responseBody = await response.Content.ReadAsStringAsync();
                         List<User> users = JsonConvert.DeserializeObject<List<User>>(responseBody);
                         UserResponse userResponse = new UserResponse { Data = users };
@@ -162,6 +167,7 @@ namespace KinoPr
                     {
                         using (HttpClient client = new HttpClient())
                         {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                             HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/film/{selectedFilm.Id}");
 
                             if (response.IsSuccessStatusCode)
@@ -225,6 +231,7 @@ namespace KinoPr
                     {
                         using (HttpClient client = new HttpClient())
                         {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                             HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/genre/{selectedGenre.Id}");
 
                             if (response.IsSuccessStatusCode)
@@ -293,6 +300,7 @@ namespace KinoPr
                     {
                         using (HttpClient client = new HttpClient())
                         {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                             HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/user/delete/{selectedUser.id}");
 
                             if (response.IsSuccessStatusCode)
