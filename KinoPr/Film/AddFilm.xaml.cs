@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -95,6 +96,7 @@ namespace KinoPr
 
                 using (HttpClient client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.currentUser.api_token);
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
                     // Добавляем данные формы в мультипарт контент

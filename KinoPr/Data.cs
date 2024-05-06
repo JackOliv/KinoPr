@@ -9,5 +9,6 @@ namespace KinoPr
     public class Data
     {
         public static User currentUser = new User();
+        public static string token { get; set; }
     }
 }
