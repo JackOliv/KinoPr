@@ -59,6 +59,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="FoodsTests.cs" />
+    <Compile Include="SessionsTests.cs" />
+    <Compile Include="UserTests.cs" />
     <Compile Include="FilmTests.cs" />
     <Compile Include="GenreTests.cs" />
     <Compile Include="AutorizationTests.cs" />

@@ -14,23 +14,21 @@ using System.IO;
 namespace KinoPr.Tests
 {
     [TestClass()]
-    public class FilmTests
+    public class SessionsTests
     {
         [TestMethod()]
-        public async Task AddFilmTest()
+        public async Task AddSessionTest()
         {
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
+            string login = "manager";
+            string password = "managermanager";
             bool actual = false;
             bool expected = true;
-            string Name = "джокер";
-            int GenreId = 1;
-            string Duration = "1 ч 30 мин";
-            int Year = 2005;
-            string Description = "Джокер плахой";
-            string Director = "Тимофеев Александр";
-            string Country = "США";
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 1;
+            int FilmId = 1;
+            int hall = 1;
             using (HttpClient client = new HttpClient())
             {
                 var parameters = new Dictionary<string, string>
@@ -49,29 +47,222 @@ namespace KinoPr.Tests
                     Data.token = token;
                 }
             }
-            Movie newMovie = new Movie
+            Session newSession = new Session
             {
-                Name = Name,
-                GenreId = GenreId,
-                Duration = Duration,
-                Year = Year,
-                Description = Description,
-                Director = Director,
-                Country = Country
+                time_start = time_start,
+                time_end = time_end,
+                session_status_id = session_status_id,
+                FilmId = FilmId,
+                hall = hall
             };
 
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(newMovie.Name), "name");
-                multiContent.Add(new StringContent(newMovie.Duration), "duration");
-                multiContent.Add(new StringContent(newMovie.Description), "description");
-                multiContent.Add(new StringContent(newMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(newMovie.Country), "country");
-                multiContent.Add(new StringContent(newMovie.Director), "director");
-                multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
+                multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    actual = true;
+                }
+            }
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public async Task FailTokenAddSessionest()
+        {
+            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
+            string login = "manager";
+            string password = "managermanager";
+            bool actual = false;
+            bool expected = false;
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 1;
+            int FilmId = 1;
+            int hall = 1;
+            using (HttpClient client = new HttpClient())
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    { "login", login },
+                    { "password", password }
+                };
+
+                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
+                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    JObject responseData = JObject.Parse(responseContent);
+                    string token = (string)responseData["data"]["api_token"];
+                    Data.token = token;
+                }
+            }
+            Session newSession = new Session
+            {
+                time_start = time_start,
+                time_end = time_end,
+                session_status_id = session_status_id,
+                FilmId = FilmId,
+                hall = hall
+            };
+
+            using (HttpClient client = new HttpClient())
+            {
+                MultipartFormDataContent multiContent = new MultipartFormDataContent();
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
+                multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    actual = true;
+                }
+            }
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public async Task FailAddSessionest()
+        {
+            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
+            string login = "manager";
+            string password = "managermanager";
+            bool actual = false;
+            bool expected = false;
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 10;
+            int FilmId = 10;
+            int hall = 10;
+            using (HttpClient client = new HttpClient())
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    { "login", login },
+                    { "password", password }
+                };
+
+                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
+                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    JObject responseData = JObject.Parse(responseContent);
+                    string token = (string)responseData["data"]["api_token"];
+                    Data.token = token;
+                }
+            }
+            Session newSession = new Session
+            {
+                time_start = time_start,
+                time_end = time_end,
+                session_status_id = session_status_id,
+                FilmId = FilmId,
+                hall = hall
+            };
+
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
+                MultipartFormDataContent multiContent = new MultipartFormDataContent();
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
+                multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    actual = true;
+                }
+            }
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public async Task EditSessionTest()
+        {
+            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
+            string login = "manager";
+            string password = "managermanager";
+            bool actual = false;
+            bool expected = true;
+            int sessionid = 0;
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 4;
+            int FilmId = 2;
+            int hall = 1;
+            using (HttpClient client = new HttpClient())
+            {
+                var parameters = new Dictionary<string, string>
+                {
+                    { "login", login },
+                    { "password", password }
+                };
+
+                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
+                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    JObject responseData = JObject.Parse(responseContent);
+                    string token = (string)responseData["data"]["api_token"];
+                    Data.token = token;
+                }
+            }
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
+                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
+                    Session nsession = sessions.FirstOrDefault(f => f.time_start == DateTime.Parse("2005-5-5 16:0:0"));
+                    sessionid = nsession.id;
+                }
+            }
+            Session updatedSession = new Session
+            {
+                time_start = time_start,
+                time_end = time_start,
+                session_status_id = session_status_id,
+                hall = hall,
+                FilmId = FilmId,
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
+                MultipartFormDataContent multiContent = new MultipartFormDataContent();
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
+                multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
                 if (response.IsSuccessStatusCode)
                 {
                     actual = true;
@@ -81,20 +272,19 @@ namespace KinoPr.Tests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod()]
-        public async Task FailAddFilmTest()
+        public async Task FailEditSessionTest()
         {
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
+            string login = "manager";
+            string password = "managermanager";
             bool actual = false;
             bool expected = false;
-            string Name = "";
-            int GenreId = 0;
-            string Duration = "";
-            int Year = 0;
-            string Description = "";
-            string Director = "";
-            string Country = "";
+            int sessionid = 0;
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 10;
+            int FilmId = 10;
+            int hall = 10;
             using (HttpClient client = new HttpClient())
             {
                 var parameters = new Dictionary<string, string>
@@ -113,29 +303,39 @@ namespace KinoPr.Tests
                     Data.token = token;
                 }
             }
-            Movie newMovie = new Movie
+            using (HttpClient client = new HttpClient())
             {
-                Name = Name,
-                GenreId = GenreId,
-                Duration = Duration,
-                Year = Year,
-                Description = Description,
-                Director = Director,
-                Country = Country
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
+                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
+                    Session nsession = sessions.FirstOrDefault(f => f.time_start == DateTime.Parse("2005-5-5 16:0:0"));
+                    sessionid = nsession.id;
+                }
+            }
+            Session updatedSession = new Session
+            {
+                time_start = time_start,
+                time_end = time_start,
+                session_status_id = session_status_id,
+                hall = hall,
+                FilmId = FilmId,
             };
-
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(newMovie.Name), "name");
-                multiContent.Add(new StringContent(newMovie.Duration), "duration");
-                multiContent.Add(new StringContent(newMovie.Description), "description");
-                multiContent.Add(new StringContent(newMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(newMovie.Country), "country");
-                multiContent.Add(new StringContent(newMovie.Director), "director");
-                multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
+                multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
                 if (response.IsSuccessStatusCode)
                 {
                     actual = true;
@@ -145,20 +345,19 @@ namespace KinoPr.Tests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod()]
-        public async Task FailTokenAddFilmTest()
+        public async Task FailTokenEditSessionTest()
         {
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
+            string login = "manager";
+            string password = "managermanager";
             bool actual = false;
             bool expected = false;
-            string Name = "джокер";
-            int GenreId = 1;
-            string Duration = "1 ч 30 мин";
-            int Year = 2005;
-            string Description = "Джокер плахой";
-            string Director = "Тимофеев Александр";
-            string Country = "США";
+            int sessionid = 0;
+            DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
+            DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
+            int session_status_id = 4;
+            int FilmId = 2;
+            int hall = 1;
             using (HttpClient client = new HttpClient())
             {
                 var parameters = new Dictionary<string, string>
@@ -177,28 +376,38 @@ namespace KinoPr.Tests
                     Data.token = token;
                 }
             }
-            Movie newMovie = new Movie
+            using (HttpClient client = new HttpClient())
             {
-                Name = Name,
-                GenreId = GenreId,
-                Duration = Duration,
-                Year = Year,
-                Description = Description,
-                Director = Director,
-                Country = Country
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
+                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
+                    Session nsession = sessions.FirstOrDefault(f => f.time_start == DateTime.Parse("2005-5-5 16:0:0"));
+                    sessionid = nsession.id;
+                }
+            }
+            Session updatedSession = new Session
+            {
+                time_start = time_start,
+                time_end = time_start,
+                session_status_id = session_status_id,
+                hall = hall,
+                FilmId = FilmId,
             };
-
             using (HttpClient client = new HttpClient())
             {
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(newMovie.Name), "name");
-                multiContent.Add(new StringContent(newMovie.Duration), "duration");
-                multiContent.Add(new StringContent(newMovie.Description), "description");
-                multiContent.Add(new StringContent(newMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(newMovie.Country), "country");
-                multiContent.Add(new StringContent(newMovie.Director), "director");
-                multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
+
+                // Добавляем данные формы в мультипарт контент
+                multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
+                multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
+                multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
+                multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
+                multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
+
+                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
                 if (response.IsSuccessStatusCode)
                 {
                     actual = true;
@@ -208,149 +417,14 @@ namespace KinoPr.Tests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod()]
-        public async Task FailTokenEditFilmTest()
+        public async Task ZDelSessionTest()
         {
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
-            int filmid = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(responseBody);
-                    Movie nfilm = movies.FirstOrDefault(f => f.Name == "Джокер");
-                    filmid = nfilm.Id;
-                }
-            }
-            Movie updatedMovie = new Movie
-            {
-                Name = "Джокер",
-                GenreId = 2,
-                Duration = "1 ч 31мин",
-                Year = 2000,
-                Description = "Джокер хороший",
-                Director = "Я",
-                Country = "Россия"
-            };
-            using (HttpClient client = new HttpClient())
-            {
-                MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(updatedMovie.Name), "name");
-                multiContent.Add(new StringContent(updatedMovie.Duration), "duration");
-                multiContent.Add(new StringContent(updatedMovie.Description), "description");
-                multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(updatedMovie.Country), "country");
-                multiContent.Add(new StringContent(updatedMovie.Director), "director");
-                multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
-            }
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public async Task FailEditFilmTest()
-        {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
-            int filmid = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(responseBody);
-                    Movie nfilm = movies.FirstOrDefault(f => f.Name == "Джокер");
-                    filmid = nfilm.Id;
-                }
-            }
-            Movie updatedMovie = new Movie
-            {
-                Name = "",
-                GenreId = 0,
-                Duration = "",
-                Year = 0,
-                Description = "",
-                Director = "",
-                Country = ""
-            };
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(updatedMovie.Name), "name");
-                multiContent.Add(new StringContent(updatedMovie.Duration), "duration");
-                multiContent.Add(new StringContent(updatedMovie.Description), "description");
-                multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(updatedMovie.Country), "country");
-                multiContent.Add(new StringContent(updatedMovie.Director), "director");
-                multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
-            }
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public async Task EditFilmTest()
-        {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
+            string login = "manager";
+            string password = "managermanager";
             bool actual = false;
             bool expected = true;
-            int filmid = 0;
+            int sessionid = 0;
             using (HttpClient client = new HttpClient())
             {
                 var parameters = new Dictionary<string, string>
@@ -372,87 +446,19 @@ namespace KinoPr.Tests
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
+                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/session");
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(responseBody);
-                    Movie nfilm = movies.FirstOrDefault(f => f.Name == "джокер");
-                    filmid = nfilm.Id;
-                }
-            }
-            Movie updatedMovie = new Movie
-            {
-                Name = "Джокер",
-                GenreId = 2,
-                Duration = "1 ч 31мин",
-                Year = 2000,
-                Description = "Джокер хороший",
-                Director = "Я",
-                Country = "Россия"
-            };
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                multiContent.Add(new StringContent(updatedMovie.Name), "name");
-                multiContent.Add(new StringContent(updatedMovie.Duration), "duration");
-                multiContent.Add(new StringContent(updatedMovie.Description), "description");
-                multiContent.Add(new StringContent(updatedMovie.Year.ToString()), "year");
-                multiContent.Add(new StringContent(updatedMovie.Country), "country");
-                multiContent.Add(new StringContent(updatedMovie.Director), "director");
-                multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
-                HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
-            }
-            Assert.AreEqual(expected, actual);
-        }
-        [TestMethod()]
-        public async Task ZDelFilmTest()
-        {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
-            int filmid = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
+                    List<Session> sessions = JsonConvert.DeserializeObject<List<Session>>(responseBody);
+                    Session nsession = sessions.FirstOrDefault(f => f.time_start == DateTime.Parse("2005-5-5 16:0:0"));
+                    sessionid = nsession.id;
                 }
             }
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/film");
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    List<Movie> movies = JsonConvert.DeserializeObject<List<Movie>>(responseBody);
-                    Movie nfilm = movies.FirstOrDefault(f => f.Name == "Джокер");
-                    filmid = nfilm.Id;
-                }
-            }
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-                HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}");
+                HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}");
                 if (response.IsSuccessStatusCode)
                 {
                     actual = true;
