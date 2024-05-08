@@ -22,8 +22,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 201;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
             int session_status_id = 1;
@@ -36,7 +36,6 @@ namespace KinoPr.Tests
                     { "login", login },
                     { "password", password }
                 };
-
                 string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
                 HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
                 if (response.IsSuccessStatusCode)
@@ -55,25 +54,17 @@ namespace KinoPr.Tests
                 FilmId = FilmId,
                 hall = hall
             };
-
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                 multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -83,8 +74,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
             int session_status_id = 1;
@@ -97,7 +88,6 @@ namespace KinoPr.Tests
                     { "login", login },
                     { "password", password }
                 };
-
                 string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
                 HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
                 if (response.IsSuccessStatusCode)
@@ -116,24 +106,16 @@ namespace KinoPr.Tests
                 FilmId = FilmId,
                 hall = hall
             };
-
             using (HttpClient client = new HttpClient())
             {
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                 multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -143,8 +125,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
             int session_status_id = 10;
@@ -181,20 +163,13 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(newSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(newSession.time_end.ToString("yyyy-MM-dd HH:mm:ss")), "time_end");
                 multiContent.Add(new StringContent(newSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(newSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(newSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/session", multiContent);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -204,8 +179,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int sessionid = 0;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
@@ -254,19 +229,13 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
                 multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
                 
             }
             Assert.AreEqual(expected, actual);
@@ -277,8 +246,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             int sessionid = 0;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
@@ -327,19 +296,13 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
                 multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
                 
             }
             Assert.AreEqual(expected, actual);
@@ -350,8 +313,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             int sessionid = 0;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
@@ -399,19 +362,13 @@ namespace KinoPr.Tests
             using (HttpClient client = new HttpClient())
             {
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(updatedSession.time_start.ToString("yyyy-M-d H:m:s")), "time_start");
                 multiContent.Add(new StringContent(updatedSession.time_end.ToString("yyyy-M-d H:m:s")), "time_end");
                 multiContent.Add(new StringContent(updatedSession.session_status_id.ToString()), "session_status_id");
                 multiContent.Add(new StringContent(updatedSession.FilmId.ToString()), "film_id");
                 multiContent.Add(new StringContent(updatedSession.hall.ToString()), "hall_id");
-
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
                 
             }
             Assert.AreEqual(expected, actual);
@@ -422,8 +379,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "manager";
             string password = "managermanager";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int sessionid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -459,10 +416,7 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/session/{sessionid}");
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }

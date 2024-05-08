@@ -21,8 +21,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 201;
             string genreName = "da";
             using (HttpClient client = new HttpClient())
             {
@@ -52,10 +52,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(newGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/genre", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -65,8 +62,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int genreid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -110,10 +107,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(updatedGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/genre/{genreid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -123,8 +117,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 422;
             string genreName = "";
             using (HttpClient client = new HttpClient())
             {
@@ -154,10 +148,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(newGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/genre", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual =(int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -167,8 +158,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             string genreName = "da";
             using (HttpClient client = new HttpClient())
             {
@@ -197,10 +188,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(newGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/genre", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual =(int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -211,8 +199,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 422;
             int genreid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -255,10 +243,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(updatedGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/genre/{genreid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -268,8 +253,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             int genreid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -312,10 +297,7 @@ namespace KinoPr.Tests
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
                 multiContent.Add(new StringContent(updatedGenre.Name), "name");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/genre/{genreid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -325,8 +307,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int genreid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -362,10 +344,7 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/genre/{genreid}");
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }

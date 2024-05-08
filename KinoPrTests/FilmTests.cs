@@ -22,8 +22,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 201;
             string Name = "джокер";
             int GenreId = 1;
             string Duration = "1 ч 30 мин";
@@ -43,6 +43,7 @@ namespace KinoPr.Tests
                 HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
                 if (response.IsSuccessStatusCode)
                 {
+
                     string responseContent = await response.Content.ReadAsStringAsync();
                     JObject responseData = JObject.Parse(responseContent);
                     string token = (string)responseData["data"]["api_token"];
@@ -72,10 +73,8 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newMovie.Director), "director");
                 multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
+                
                 
             }
             Assert.AreEqual(expected, actual);
@@ -86,8 +85,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 422;
             string Name = "";
             int GenreId = 0;
             string Duration = "";
@@ -136,10 +135,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newMovie.Director), "director");
                 multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
                 
             }
             Assert.AreEqual(expected, actual);
@@ -150,8 +146,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             string Name = "джокер";
             int GenreId = 1;
             string Duration = "1 ч 30 мин";
@@ -199,10 +195,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newMovie.Director), "director");
                 multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
                 
             }
             Assert.AreEqual(expected, actual);
@@ -213,8 +206,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             int filmid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -267,10 +260,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedMovie.Director), "director");
                 multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -280,8 +270,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 422;
             int filmid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -335,10 +325,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedMovie.Director), "director");
                 multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -348,8 +335,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int filmid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -403,10 +390,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedMovie.Director), "director");
                 multiContent.Add(new StringContent(updatedMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -416,8 +400,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int filmid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -453,10 +437,7 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/film/{filmid}");
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }

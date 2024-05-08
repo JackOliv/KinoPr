@@ -22,8 +22,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             string Surname = "Михайличенко";
             string Name = "Елена";
             string Patronumic = "Феликсовна";
@@ -77,10 +77,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newUser.email), "email");
                 multiContent.Add(new StringContent(newUser.role_id.ToString()), "role_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/user/create", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -90,8 +87,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 422;
             string Surname = "";
             string Name = "";
             string Patronumic = "";
@@ -145,10 +142,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newUser.email), "email");
                 multiContent.Add(new StringContent(newUser.role_id.ToString()), "role_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/user/create", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -158,8 +152,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             string Surname = "Михайличенко";
             string Name = "Елена";
             string Patronumic = "Феликсовна";
@@ -212,10 +206,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newUser.email), "email");
                 multiContent.Add(new StringContent(newUser.role_id.ToString()), "role_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/user/create", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -225,8 +216,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int userid = 0;
             string Surname = "Швардыгула";
             string Name = "Герман";
@@ -281,12 +272,8 @@ namespace KinoPr.Tests
             };
             using (HttpClient client = new HttpClient())
             {
-                // Устанавливаем токен авторизации в заголовке запроса
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
-
                 MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-                // Добавляем данные формы в мультипарт контент
                 multiContent.Add(new StringContent(updatedUser.name), "name");
                 multiContent.Add(new StringContent(updatedUser.surname), "surname");
                 multiContent.Add(new StringContent(updatedUser.patronymic), "patronymic");
@@ -296,13 +283,8 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedUser.password), "password");
                 multiContent.Add(new StringContent(updatedUser.email), "email");
                 multiContent.Add(new StringContent(updatedUser.role_id.ToString()), "role_id");
-
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/user/update/{userid}", multiContent);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -312,14 +294,13 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 422;
             int userid = 0;
             string Surname = "da";
             string Name = "da";
             string Patronumic = "da";
             string PhoneNumber = "da";
-            DateTime Birh = DateTime.Parse("1900-5-5");
             string Login = "da";
             string Password = "da";
             string Email = "da@da.ru";
@@ -360,7 +341,6 @@ namespace KinoPr.Tests
                 name = Name,
                 patronymic = Patronumic,
                 phone_number = PhoneNumber,
-                birth = Birh,
                 login = Login,
                 password = Password,
                 email = Email,
@@ -374,16 +354,12 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedUser.surname), "surname");
                 multiContent.Add(new StringContent(updatedUser.patronymic), "patronymic");
                 multiContent.Add(new StringContent(updatedUser.phone_number), "phone_number");
-                multiContent.Add(new StringContent(updatedUser.birth.ToString("yyyy-M-d H:m:s")), "birth");
                 multiContent.Add(new StringContent(updatedUser.login), "login");
                 multiContent.Add(new StringContent(updatedUser.password), "password");
                 multiContent.Add(new StringContent(updatedUser.email), "email");
                 multiContent.Add(new StringContent(updatedUser.role_id.ToString()), "role_id");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/user/update/{userid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -393,8 +369,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = false;
+            int actual = 0;
+            int expected = 500;
             int userid = 0;
             string Surname = "Швардыгула";
             string Name = "Герман";
@@ -459,10 +435,7 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(updatedUser.email), "email");
                 multiContent.Add(new StringContent(updatedUser.role_id.ToString()), "role_id");
                 HttpResponseMessage response = await client.PostAsync($"http://motov-ae.tepk-it.ru/api/user/update/{userid}", multiContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
@@ -472,8 +445,8 @@ namespace KinoPr.Tests
             string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
             string login = "admin";
             string password = "adminadmin";
-            bool actual = false;
-            bool expected = true;
+            int actual = 0;
+            int expected = 200;
             int userid = 0;
             using (HttpClient client = new HttpClient())
             {
@@ -509,10 +482,7 @@ namespace KinoPr.Tests
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
                 HttpResponseMessage response = await client.DeleteAsync($"http://motov-ae.tepk-it.ru/api/user/delete/{userid}");
-                if (response.IsSuccessStatusCode)
-                {
-                    actual = true;
-                }
+                actual = (int)response.StatusCode;
             }
             Assert.AreEqual(expected, actual);
         }
