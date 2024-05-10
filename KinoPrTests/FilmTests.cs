@@ -60,7 +60,6 @@ namespace KinoPr.Tests
                 Director = Director,
                 Country = Country
             };
-
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
@@ -74,8 +73,6 @@ namespace KinoPr.Tests
                 multiContent.Add(new StringContent(newMovie.GenreId.ToString()), "genre_id");
                 HttpResponseMessage response = await client.PostAsync("http://motov-ae.tepk-it.ru/api/film", multiContent);
                 actual = (int)response.StatusCode;
-                
-                
             }
             Assert.AreEqual(expected, actual);
         }
@@ -143,9 +140,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenAddFilmTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             string Name = "джокер";
@@ -155,24 +149,6 @@ namespace KinoPr.Tests
             string Description = "Джокер плахой";
             string Director = "Тимофеев Александр";
             string Country = "США";
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             Movie newMovie = new Movie
             {
                 Name = Name,
@@ -203,30 +179,9 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenEditFilmTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             int filmid = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);

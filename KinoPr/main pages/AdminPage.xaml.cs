@@ -389,6 +389,28 @@ namespace KinoPr
                 MessageBox.Show("Ошибка при удалении пользователя: " + ex.Message);
             }
         }
+        //Список сеансов
+        private void AddSessionButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new AddSession(mainWindow));
+        }
+        private void EditSessionButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем выделенный элемент
+            Session selectedSession = (Session)SessionDataGrid.SelectedItem;
+
+            // Проверяем, что элемент выбран
+            if (selectedSession != null)
+            {
+                // Переходим на страницу редактирования, передавая выбранный элемент как параметр
+                FrameManager.MainFrame.Navigate(new EditSession(selectedSession, mainWindow));
+
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите элемент для редактирования.");
+            }
+        }
         private async void DeleteSessionButton_Click(object sender, RoutedEventArgs e)
         {
             try

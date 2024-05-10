@@ -149,9 +149,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenAddUserTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             string Surname = "Михайличенко";
@@ -162,26 +159,7 @@ namespace KinoPr.Tests
             string Login = "elena7735";
             string Password = "e75bbf55f";
             string Email = "elena7735@hotmail.com";
-            int Role = 1;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
-            User newUser = new User
+            int Role = 1;            User newUser = new User
             {
                surname = Surname,
                name = Name,
@@ -213,9 +191,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task EditUserTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 200;
             int userid = 0;
@@ -228,24 +203,6 @@ namespace KinoPr.Tests
             string Password = "ba658cd5f";
             string Email = "german90@ya.ru";
             int Role = 1;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
@@ -366,9 +323,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenEditUserTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             int userid = 0;
@@ -381,24 +335,6 @@ namespace KinoPr.Tests
             string Password = "ba658cd5f";
             string Email = "german90@ya.ru";
             int Role = 1;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/users");

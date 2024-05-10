@@ -155,30 +155,9 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenAddGenreTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             string genreName = "da";
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             Genre newGenre = new Genre
             {
                 Name = genreName
@@ -250,30 +229,10 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenEditGenreTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "admin";
-            string password = "adminadmin";
             int actual = 0;
             int expected = 401;
             int genreid = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
+            
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync("http://motov-ae.tepk-it.ru/api/genre");
@@ -285,7 +244,6 @@ namespace KinoPr.Tests
                     genreid = daGenre.Id;
                 }
             }
-            // Создаем объект Genre для обновления данных
             Genre updatedGenre = new Genre
             {
                 Id = genreid,

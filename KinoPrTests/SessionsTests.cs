@@ -71,9 +71,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenAddSessionest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "manager";
-            string password = "managermanager";
             int actual = 0;
             int expected = 401;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
@@ -81,23 +78,6 @@ namespace KinoPr.Tests
             int session_status_id = 1;
             int FilmId = 1;
             int hall = 1;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             Session newSession = new Session
             {
                 time_start = time_start,
@@ -310,9 +290,6 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenEditSessionTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "manager";
-            string password = "managermanager";
             int actual = 0;
             int expected = 401;
             int sessionid = 0;
@@ -321,24 +298,6 @@ namespace KinoPr.Tests
             int session_status_id = 4;
             int FilmId = 2;
             int hall = 1;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);

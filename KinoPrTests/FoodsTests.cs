@@ -117,32 +117,12 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenAddFoodTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "manager";
-            string password = "managermanager";
             int actual = 0;
             int expected = 401;
             string name = "Еда";
             decimal price = Convert.ToDecimal( "166,45");
             int mass = 150;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
+           
             Product newProduct = new Product
             {
                 Name = name,
@@ -284,33 +264,13 @@ namespace KinoPr.Tests
         [TestMethod()]
         public async Task FailTokenEditFoodTest()
         {
-            string BaseUrl = "http://motov-ae.tepk-it.ru/api/login";
-            string login = "manager";
-            string password = "managermanager";
+            
             int actual = 0;
             int expected = 401;
             int productid = 0;
             string name = "Eда";
             decimal price = Convert.ToDecimal("166,45");
             int mass = 150;
-            using (HttpClient client = new HttpClient())
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "login", login },
-                    { "password", password }
-                };
-
-                string queryString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
-                HttpResponseMessage response = await client.PostAsync($"{BaseUrl}?{queryString}", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    JObject responseData = JObject.Parse(responseContent);
-                    string token = (string)responseData["data"]["api_token"];
-                    Data.token = token;
-                }
-            }
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Data.token);
