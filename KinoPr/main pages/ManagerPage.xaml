@@ -58,7 +58,8 @@
                     </Grid>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль"  Margin="0,0,0,5">
+
+            <TabItem Style="{DynamicResource TabItem}" DockPanel.Dock="Bottom" Header="Профиль" IsSelected="True" Margin="0,0,0,5">
                 <TabItem.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>

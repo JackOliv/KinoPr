@@ -75,7 +75,7 @@ namespace KinoPr.Tests
             string login = "manager";
             string password = "managermanager";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");
             int session_status_id = 1;
@@ -314,7 +314,7 @@ namespace KinoPr.Tests
             string login = "manager";
             string password = "managermanager";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             int sessionid = 0;
             DateTime time_start = DateTime.Parse("2005-5-5 16:0:0");
             DateTime time_end = DateTime.Parse("2005-5-5 16:0:0");

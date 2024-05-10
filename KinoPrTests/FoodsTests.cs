@@ -121,7 +121,7 @@ namespace KinoPr.Tests
             string login = "manager";
             string password = "managermanager";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             string name = "Еда";
             decimal price = Convert.ToDecimal( "166,45");
             int mass = 150;
@@ -288,7 +288,7 @@ namespace KinoPr.Tests
             string login = "manager";
             string password = "managermanager";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             int productid = 0;
             string name = "Eда";
             decimal price = Convert.ToDecimal("166,45");

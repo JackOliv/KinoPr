@@ -159,7 +159,7 @@ namespace KinoPr.Tests
             string login = "admin";
             string password = "adminadmin";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             string genreName = "da";
             using (HttpClient client = new HttpClient())
             {
@@ -254,7 +254,7 @@ namespace KinoPr.Tests
             string login = "admin";
             string password = "adminadmin";
             int actual = 0;
-            int expected = 500;
+            int expected = 401;
             int genreid = 0;
             using (HttpClient client = new HttpClient())
             {
