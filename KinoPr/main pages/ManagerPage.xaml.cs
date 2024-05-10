@@ -173,7 +173,7 @@ namespace KinoPr
 
 
 
-        //Список пользователей
+        //Список продуктов
         private void AddFoodButton_Click(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new AddFood(mainWindow));
@@ -215,7 +215,7 @@ namespace KinoPr
 
                             if (response.IsSuccessStatusCode)
                             {
-                                MessageBox.Show("Сеанс успешно удален!");
+                                MessageBox.Show("Продукт успешно удален!");
                                 // Обновляем список жанров после удаления
                                 await LoadProducts();
                             }
