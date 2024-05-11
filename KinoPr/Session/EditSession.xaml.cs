@@ -132,7 +132,15 @@ namespace KinoPr
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+            if (Data.currentUser.role_id == 3)
+            {
+                FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+
+            }
+            else
+            {
+                FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+            }
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
