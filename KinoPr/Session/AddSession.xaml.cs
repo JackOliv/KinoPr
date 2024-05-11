@@ -179,7 +179,15 @@ namespace KinoPr
                     {
                         MessageBox.Show("Сеанс успешно добавлен!");
                         // Переходим на страницу администратора после успешного добавления
-                        FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+                        if (Data.currentUser.role_id == 3)
+                        {
+                            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+
+                        }
+                        else
+                        {
+                            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+                        }
                     }
                     else
                     {

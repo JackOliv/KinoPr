@@ -186,7 +186,15 @@ namespace KinoPr
                     {
                         MessageBox.Show("Сеанс успешно обновлен!");
                         // Переходим на страницу администратора после успешного обновления
-                        FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+                        if (Data.currentUser.role_id == 3)
+                        {
+                            FrameManager.MainFrame.Navigate(new AdminPage(mainWindow));
+
+                        }
+                        else
+                        {
+                            FrameManager.MainFrame.Navigate(new ManagerPage(mainWindow));
+                        }
                     }
                     else
                     {
